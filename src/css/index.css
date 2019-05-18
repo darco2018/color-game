@@ -5,11 +5,6 @@ body {
   background: #15151b;
 }
 
-.h1,
-h1 {
-  font-size: 4rem;
-}
-
 .jumbotron {
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
@@ -40,4 +35,62 @@ a {
 .nav-item,
 .navlink {
   display: inline-block;
+}
+
+.squares-wrapper {
+  text-align: center;
+  padding: 1rem;
+  max-width: 930px;
+  margin: 0.5rem auto 0 auto;
+}
+
+.square {
+  background: green;
+  margin: 0.4rem;
+  border-radius: 10%;
+  width: 10rem;
+  height: 10rem;
+  display: inline-block;
+}
+
+.h1,
+h1 {
+  font-size: 1.8rem;
+}
+
+.h2,
+h2 {
+  font-size: 1rem;
+}
+
+@media (min-width: 620px) {
+  .square {
+    background: grey;
+    margin: 0.3rem;
+    width: 11rem;
+    height: 11rem;
+  }
+
+  .squares-wrapper {
+    padding-top: 2rem;
+  }
+}
+
+@media (min-width: 800px) {
+  .square {
+    background: green;
+    margin: 0.5rem;
+    width: 13rem;
+    height: 13rem;
+  }
+
+  .h1,
+  h1 {
+    font-size: 2.5rem;
+  }
+
+  .h2,
+  h2 {
+    font-size: 1.3rem;
+  }
 }
