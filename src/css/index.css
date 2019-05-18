@@ -5,6 +5,19 @@ body {
   background: #15151b;
 }
 
+.h1,
+h1 {
+  font-size: 4rem;
+}
+
+.jumbotron {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  background: var(--primary);
+  color: var(--light);
+  margin: 0;
+}
+
 a {
   font-weight: bold;
 }
