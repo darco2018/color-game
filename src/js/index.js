@@ -1,6 +1,6 @@
 /** @format */
 import "../css/index.css";
-
+/* 
 document.querySelector("body").innerHTML = "JS is working";
 
 // j is lowercase: jQuery
@@ -9,3 +9,4 @@ if (jQuery) {
 } else {
   alert("Jquery is NOT loaded");
 }
+ */

@@ -1,6 +1,37 @@
 /** @format */
+@import url("../../node_modules/bootstrap/dist/css/bootstrap.min.css");
 
 body {
-  background: black;
-  color: white;
+  color: var(--warning);
+  background: var(--primary);
+}
+
+a {
+  /* padding-left: 2rem;
+  padding-right: 2rem; */
+  /* margin-left: 0.5rem;
+  margin-right: 0.5rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem; */
+  font-weight: bold;
+}
+
+a:link {
+  /* padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  background: yellow;
+  color: var(--warning);
+  //background: var(--success); */
+}
+
+a:active {
+  color: #0000ff;
+}
+
+.navbar-nav .nav-link {
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  background: var(--success);
 }
