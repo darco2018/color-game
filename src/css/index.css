@@ -2,36 +2,29 @@
 @import url("../../node_modules/bootstrap/dist/css/bootstrap.min.css");
 
 body {
-  color: var(--warning);
-  background: var(--primary);
+  background: #15151b;
 }
 
 a {
-  /* padding-left: 2rem;
-  padding-right: 2rem; */
-  /* margin-left: 0.5rem;
-  margin-right: 0.5rem;
-  margin-top: 0.5rem;
-  margin-bottom: 0.5rem; */
   font-weight: bold;
 }
 
-a:link {
-  /* padding-left: 0.5rem;
-  padding-right: 0.5rem;
-  margin-top: 0.5rem;
-  margin-bottom: 0.5rem;
-  background: yellow;
-  color: var(--warning);
-  //background: var(--success); */
-}
-
-a:active {
-  color: #0000ff;
-}
-
 .navbar-nav .nav-link {
-  padding-left: 0.5rem;
-  padding-right: 0.5rem;
-  background: var(--success);
+  margin: 0 -0.2rem;
+  padding-left: 0.6rem;
+  padding-right: 0.6rem;
+}
+
+.navbar-light .navbar-nav .nav-link {
+  color: var(--primary);
+}
+
+.navbar-nav:hover .nav-link:hover {
+  color: var(--light);
+  background: var(--primary);
+}
+
+.nav-item,
+.navlink {
+  display: inline-block;
 }
