@@ -13,31 +13,48 @@ body {
   margin: 0;
 }
 
+.bar {
+  background: var(--light);
+}
+
+.links-wrapper {
+  /*   text-align: center;
+  padding: 0.2rem;
+  max-width: 670px;
+  margin: 0 auto;
+  background: lightcoral;
+  height: 30px; */
+  text-align: center;
+  padding: 0.2rem 7rem;
+  max-width: 670px;
+  margin: 0 auto;
+  /* background: lightcoral; */
+  height: 30px;
+}
+.links-wrapper > a:nth-child(1) {
+  float: left;
+}
+
+.menu--right {
+  float: right;
+  /* background: yellow; */
+  margin: 0;
+  padding: 0;
+}
+.control-btn {
+  padding: 0 3px;
+}
+
+.menu--right .control-btn:nth-child(1) {
+  /* color: red; */
+}
+
 a {
   font-weight: bold;
 }
 
-.navbar-nav .nav-link {
-  margin: 0 -0.2rem;
-  padding-left: 0.6rem;
-  padding-right: 0.6rem;
-}
-
-.navbar-light .navbar-nav .nav-link {
-  color: var(--primary);
-}
-
-.navbar-nav:hover .nav-link:hover {
-  color: var(--light);
-  background: var(--primary);
-}
-
-.nav-item,
-.navlink {
-  display: inline-block;
-}
-
 .squares-wrapper {
+  clear: both;
   text-align: center;
   padding: 1rem;
   max-width: 930px;
@@ -64,11 +81,14 @@ h2 {
 }
 
 @media (min-width: 620px) {
+  .links-wrapper {
+    padding: 0.2rem 5rem;
+  }
   .square {
     background: grey;
-    margin: 0.3rem;
-    width: 11rem;
-    height: 11rem;
+    margin: 0.4rem;
+    width: 10.5rem;
+    height: 10.5rem;
   }
 
   .squares-wrapper {
@@ -77,6 +97,9 @@ h2 {
 }
 
 @media (min-width: 800px) {
+  .links-wrapper {
+    padding: 0.2rem 1rem;
+  }
   .square {
     background: green;
     margin: 0.5rem;
