@@ -5,17 +5,29 @@ body {
   background: #15151b;
 }
 
-a {
-  font-weight: bold;
+a:link,
+a:visited {
+  background-color: var(--light);
+  color: var(--primary);
+  display: inline-block;
+  padding: 5px 10px;
+  margin: 0;
+  border: none;
   text-decoration: none;
-}
-a:hover {
-  text-decoration: none;
-  color: white;
-  background: var(--primary);
-  padding: 0.5rem;
+  text-align: center;
+  transition-duration: 0.4s;
+  cursor: pointer;
 }
 
+a:hover,
+a:active {
+  background-color: var(--primary);
+  color: var(--light);
+}
+
+.menu--right > a:nth-child(1) {
+  margin-right: -5px;
+}
 .jumbotron {
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
@@ -24,16 +36,17 @@ a:hover {
   margin: 0;
 }
 
-.bar {
+nav {
   background: var(--light);
+  font-weight: bold;
 }
 
 .links-wrapper {
   text-align: center;
-  padding: 0.2rem 7rem;
+  padding: 0 7rem;
   max-width: 670px;
   margin: 0 auto;
-  height: 30px;
+  height: 34px;
 }
 .menu--left {
   float: left;
@@ -46,6 +59,13 @@ a:hover {
   margin: 0;
   padding: 0;
 }
+
+/* .menu--right a:first-child {
+  color: red;
+  margin: 0;
+  padding: 0;
+} */
+
 .control-btn {
   padding: 0 3px;
 }
@@ -79,7 +99,7 @@ h2 {
 
 @media (min-width: 620px) {
   .links-wrapper {
-    padding: 0.2rem 5rem;
+    padding: 0 5rem;
   }
   .square {
     background: grey;
@@ -95,7 +115,7 @@ h2 {
 
 @media (min-width: 800px) {
   .links-wrapper {
-    padding: 0.2rem 1rem;
+    padding: 0rem 1rem;
   }
   .square {
     background: green;
