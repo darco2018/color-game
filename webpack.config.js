@@ -7,7 +7,7 @@ const parts = require("./webpack.parts");
 
 const PATHS = {
   app: path.resolve(__dirname, "src"),
-  dist: path.resolve(__dirname, "dist")
+  dist: path.resolve(__dirname, "dist"),
 };
 
 const commonConfig = merge([
@@ -15,12 +15,11 @@ const commonConfig = merge([
     entry: {
       // by default: It will look in ./src/index.js as the default entry point.
       // Moreover, it will spit out the bundle in ./dist/main.js.
-      main: "./src/js/main.js",
-      index: "./src/js/index.js"
+      index: "./src/js/index.js",
     },
     output: {
       filename: path.join("js", "[name]-[hash].js"),
-      path: path.resolve(__dirname, PATHS.dist)
+      path: path.resolve(__dirname, PATHS.dist),
       // publicPath: PATHS.dist
     },
     optimization: {
@@ -36,11 +35,11 @@ const commonConfig = merge([
       },
       runtimeChunk: "single" //  create a single runtime bundle for all chunks: 
       */
-    }
+    },
   },
   parts.stylelint(),
   parts.eslint({ include: PATHS.app }),
-  parts.loadHtml({ include: PATHS.app })
+  parts.loadHtml({ include: PATHS.app }),
 ]);
 
 const productionConfig = merge([
@@ -50,28 +49,28 @@ const productionConfig = merge([
   parts.babel({ include: PATHS.app }),
   // prod only:
   parts.extractCSS({
-    use: ["css-loader", parts.nextGenerationCss()] // if it works: pageOne.css should have only one keyframes
+    use: ["css-loader", parts.nextGenerationCss()], // if it works: pageOne.css should have only one keyframes
   }),
   parts.purifyCSS({
     // must be AFTER extraction. It decreases the .css file with purecss, bootstrap, etc.
     // Using PurifyCSS loses CSS source maps even if you have enabled them with loader specific configuration due to the way it works underneath.
     // https://www.codewall.co.uk/how-to-remove-unused-css-from-your-website/
     paths: glob.sync(`${PATHS.app}/**/*.js`, { nodir: true }),
-    purifyOptions: { minify: true, info: true }
+    purifyOptions: { minify: true, info: true },
   }),
   // In case you want to compress your images, use image-webpack-loader, svgo-loader (SVG specific), or imagemin-webpack-plugin. */
   parts.loadImages({
     options: {
       limit: 5000,
-      name: path.join("img", "[name].[ext]")
-    }
+      name: path.join("img", "[name].[ext]"),
+    },
   }),
   parts.copyRootFiles({
     context: PATHS.app,
     from: "**/*",
     to: PATHS.dist,
-    ignore: ["css/*", "js/*", "img/*", "**/*.html", "private/*", "notes.txt"]
-  })
+    ignore: ["css/*", "js/*", "img/*", "**/*.html", "private/*", "notes.txt"],
+  }),
 ]);
 
 /* The loadImages() configuration defaults to url-loader during development and uses both url-loader and file-loader in production 
@@ -84,13 +83,13 @@ const productionConfig = merge([
 
 const developmentConfig = merge([
   {
-    devtool: "cheap-module-eval-source-map" // devtool: "eval-source-map", is the highest quality option of the inline options. It's also the slowest one as it emits the most data:
+    devtool: "cheap-module-eval-source-map", // devtool: "eval-source-map", is the highest quality option of the inline options. It's also the slowest one as it emits the most data:
   },
   parts.devServer({
-    contentBase: PATHS.app
+    contentBase: PATHS.app,
   }),
   parts.loadCSS({ include: PATHS.app }), // development only
-  parts.loadImages()
+  parts.loadImages(),
 ]);
 
 module.exports = mode => {
