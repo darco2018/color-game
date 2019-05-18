@@ -5,6 +5,17 @@ body {
   background: #15151b;
 }
 
+a {
+  font-weight: bold;
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: none;
+  color: white;
+  background: var(--primary);
+  padding: 0.5rem;
+}
+
 .jumbotron {
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
@@ -18,39 +29,25 @@ body {
 }
 
 .links-wrapper {
-  /*   text-align: center;
-  padding: 0.2rem;
-  max-width: 670px;
-  margin: 0 auto;
-  background: lightcoral;
-  height: 30px; */
   text-align: center;
   padding: 0.2rem 7rem;
   max-width: 670px;
   margin: 0 auto;
-  /* background: lightcoral; */
   height: 30px;
 }
-.links-wrapper > a:nth-child(1) {
+.menu--left {
   float: left;
+  margin: 0;
+  padding: 0;
 }
 
 .menu--right {
   float: right;
-  /* background: yellow; */
   margin: 0;
   padding: 0;
 }
 .control-btn {
   padding: 0 3px;
-}
-
-.menu--right .control-btn:nth-child(1) {
-  /* color: red; */
-}
-
-a {
-  font-weight: bold;
 }
 
 .squares-wrapper {
