@@ -10,3 +10,25 @@ if (jQuery) {
   alert("Jquery is NOT loaded");
 }
  */
+
+$(document).ready(function main() {
+  const colorGame = (() => {
+    const squares = document.querySelectorAll(".square");
+
+    const addListeners = () => {
+      squares.forEach(elem => {
+        elem.addEventListener("click", () => {
+          console.log("hi");
+        });
+      });
+    };
+
+    const init = () => {
+      addListeners();
+    };
+
+    return { init };
+  })();
+
+  colorGame.init();
+});
