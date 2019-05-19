@@ -29,6 +29,7 @@ a:active {
   margin-right: -5px;
 }
 .jumbotron {
+  text-align: center;
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
   background: var(--primary);
@@ -36,14 +37,14 @@ a:active {
   margin: 0;
 }
 
-nav {
+.controls-bar {
   background: var(--light);
   font-weight: bold;
 }
 
-.links-wrapper {
+.menus-wrapper {
   text-align: center;
-  padding: 0 7rem;
+  padding: 0 5rem;
   max-width: 670px;
   margin: 0 auto;
   height: 34px;
@@ -59,12 +60,6 @@ nav {
   margin: 0;
   padding: 0;
 }
-
-/* .menu--right a:first-child {
-  color: red;
-  margin: 0;
-  padding: 0;
-} */
 
 .control-btn {
   padding: 0 3px;
@@ -98,24 +93,25 @@ h2 {
 }
 
 @media (min-width: 620px) {
-  .links-wrapper {
-    padding: 0 5rem;
-  }
   .square {
     background: grey;
     margin: 0.4rem;
-    width: 10.5rem;
-    height: 10.5rem;
+    width: 10.7rem;
+    height: 10.7rem;
   }
 
   .squares-wrapper {
+    max-width: 760px;
+    padding-left: 1rem;
+    padding-right: 1rem;
     padding-top: 2rem;
   }
 }
 
 @media (min-width: 800px) {
-  .links-wrapper {
-    padding: 0rem 1rem;
+  .menus-wrapper {
+    max-width: 930px;
+    padding: 0rem 8rem;
   }
   .square {
     background: green;
