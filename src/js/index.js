@@ -1,23 +1,15 @@
 /** @format */
 import "../css/index.css";
-/* 
-document.querySelector("body").innerHTML = "JS is working";
-
-// j is lowercase: jQuery
-if (jQuery) {
-  $("body").append("<p>Jquery is loaded - from CDN</p>");
-} else {
-  alert("Jquery is NOT loaded");
-}
- */
 
 $(document).ready(function main() {
   const colorGame = (() => {
     const rgbLowerBound = 0;
     const rgbUpperBound = 256;
+    const noOfColorSquares = 6;
     const squares = document.querySelectorAll(".square");
     const displayElem = ".rgb-text";
-    let currentColor = "rgb(0, 0, 0)";
+    let winningColor;
+    let winningSquare;
 
     const getRandomInt = (minInclusive, maxExclusive) => {
       const minInt = Math.ceil(minInclusive);
@@ -25,7 +17,7 @@ $(document).ready(function main() {
       return Math.floor(Math.random() * (maxInt - minInt)) + minInt;
     };
 
-    const getRandomColor = () => {
+    const getRandomRgbColor = () => {
       const red = getRandomInt(rgbLowerBound, rgbUpperBound);
       const green = getRandomInt(rgbLowerBound, rgbUpperBound);
       const blue = getRandomInt(rgbLowerBound, rgbUpperBound);
@@ -44,18 +36,39 @@ $(document).ready(function main() {
         });
       });
     };
-    const addColorTo = arr => {
-      arr.forEach(e => {
-        e.style.backgroundColor = getRandomColor();
+    const setBgrColor = (color, elem) => {
+      const e = elem;
+      e.style.backgroundColor = color;
+    };
+
+    const setData = (elem, property, val) => {
+      const element = elem;
+      element.dataset[property] = val;
+    };
+
+    const addRandomBgrColorsAndOrder = arr => {
+      arr.forEach((e, i) => {
+        setBgrColor(getRandomRgbColor(), e);
+        setData(e, "number", i);
       });
     };
 
+    const setWinningColorAndWinningSquare = arr => {
+      winningColor = getRandomRgbColor();
+      winningSquare = arr[getRandomInt(0, noOfColorSquares)];
+    };
+
     const init = () => {
+      addRandomBgrColorsAndOrder(squares);
+      setWinningColorAndWinningSquare(squares);
+      setBgrColor(winningColor, winningSquare);
+      showOnPage(winningColor, displayElem);
       addListenersTo(squares);
-      addColorTo(squares);
-      currentColor = getRandomColor();
-      showOnPage(currentColor, displayElem);
-      console.log();
+      console.log(
+        `${winningColor}, winning sqr: ${winningSquare}, ${
+          winningSquare.dataset.number
+        }`
+      );
     };
 
     return { init };
