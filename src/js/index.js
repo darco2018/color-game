@@ -9,7 +9,7 @@ $(document).ready(function main() {
     const squares = document.querySelectorAll(".square");
     const displayElem = ".rgb-text";
     let winningColor;
-    let winningSquare;
+    let winningId;
 
     const getRandomInt = (minInclusive, maxExclusive) => {
       const minInt = Math.ceil(minInclusive);
@@ -29,16 +29,40 @@ $(document).ready(function main() {
       document.querySelector(selector).textContent = color;
     };
 
-    const addListenersTo = arr => {
-      arr.forEach(elem => {
-        elem.addEventListener("click", () => {
-          console.log("hi");
-        });
-      });
+    const isWinner = candidate => {
+      return winningId === candidate;
     };
     const setBgrColor = (color, elem) => {
       const e = elem;
       e.style.backgroundColor = color;
+    };
+
+    const setSameColorOnSquares = () => {
+      squares.forEach(e => {
+        setBgrColor(winningColor, e);
+      });
+    };
+
+    const hide = elem => {
+      const e = elem;
+      e.style.visibility = "hidden";
+    };
+
+    const processClickedSquare = sqr => {
+      const squareId = Number(sqr.dataset.id);
+      if (isWinner(squareId)) {
+        setSameColorOnSquares();
+      } else {
+        hide(sqr);
+      }
+    };
+
+    const addListenersToSquares = () => {
+      squares.forEach(elem => {
+        elem.addEventListener("click", function fn() {
+          processClickedSquare(this);
+        });
+      });
     };
 
     const setData = (elem, property, val) => {
@@ -46,29 +70,25 @@ $(document).ready(function main() {
       element.dataset[property] = val;
     };
 
-    const addRandomBgrColorsAndOrder = arr => {
-      arr.forEach((e, i) => {
+    const setBgrColorsAndDataOnSquares = () => {
+      squares.forEach((e, i) => {
         setBgrColor(getRandomRgbColor(), e);
-        setData(e, "number", i);
+        setData(e, "id", i);
       });
     };
 
-    const setWinningColorAndWinningSquare = arr => {
+    const setWinningColorAndWinningId = () => {
       winningColor = getRandomRgbColor();
-      winningSquare = arr[getRandomInt(0, noOfColorSquares)];
+      winningId = getRandomInt(0, noOfColorSquares);
     };
 
     const init = () => {
-      addRandomBgrColorsAndOrder(squares);
-      setWinningColorAndWinningSquare(squares);
-      setBgrColor(winningColor, winningSquare);
+      setBgrColorsAndDataOnSquares();
+      setWinningColorAndWinningId();
+      setBgrColor(winningColor, squares[winningId]);
       showOnPage(winningColor, displayElem);
-      addListenersTo(squares);
-      console.log(
-        `${winningColor}, winning sqr: ${winningSquare}, ${
-          winningSquare.dataset.number
-        }`
-      );
+      addListenersToSquares();
+      console.log(`${winningColor}, winning id: ${winningId}}`);
     };
 
     return { init };
