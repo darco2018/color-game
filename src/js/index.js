@@ -7,6 +7,7 @@ $(document).ready(function main() {
     const rgbUpperBound = 256;
     const noOfColorSquares = 6;
     const squares = document.querySelectorAll(".square");
+    const resetElem = document.querySelector(".new-colors");
     const displayElem = ".rgb-text";
     let winningColor;
     let winningId;
@@ -35,6 +36,7 @@ $(document).ready(function main() {
     const setBgrColor = (color, elem) => {
       const e = elem;
       e.style.backgroundColor = color;
+      e.style.visibility = "visible";
     };
 
     const setSameColorOnSquares = () => {
@@ -57,14 +59,6 @@ $(document).ready(function main() {
       }
     };
 
-    const addListenersToSquares = () => {
-      squares.forEach(elem => {
-        elem.addEventListener("click", function fn() {
-          processClickedSquare(this);
-        });
-      });
-    };
-
     const setData = (elem, property, val) => {
       const element = elem;
       element.dataset[property] = val;
@@ -82,13 +76,30 @@ $(document).ready(function main() {
       winningId = getRandomInt(0, noOfColorSquares);
     };
 
-    const init = () => {
+    const addListenersToSquares = () => {
+      squares.forEach(elem => {
+        elem.addEventListener("click", function fn() {
+          processClickedSquare(this);
+        });
+      });
+    };
+
+    const reset = () => {
       setBgrColorsAndDataOnSquares();
       setWinningColorAndWinningId();
       setBgrColor(winningColor, squares[winningId]);
       showOnPage(winningColor, displayElem);
-      addListenersToSquares();
       console.log(`${winningColor}, winning id: ${winningId}}`);
+    };
+
+    const addOtherlisteners = () => {
+      resetElem.addEventListener("click", reset);
+    };
+
+    const init = () => {
+      reset();
+      addListenersToSquares();
+      addOtherlisteners();
     };
 
     return { init };
