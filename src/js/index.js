@@ -3,20 +3,29 @@ import "../css/index.css";
 
 $(document).ready(function main() {
   const colorGame = (() => {
+    const ROUNDS_LIMIT = 5;
+    let currentRound = 0;
     const rgbLowerBound = 0;
     const rgbUpperBound = 256;
     const GAME_STATUS = {
       over: 0,
       on: 1,
     };
-    let currentStatus = GAME_STATUS.on;
+    let currentGameStatus = GAME_STATUS.on;
+    const ROUND_STATUS = {
+      over: 0,
+      on: 1,
+    };
+    let currentRoundStatus = ROUND_STATUS.on;
     const LEVEL = {
       easy: 3,
       hard: 6,
     };
     let currentLevel = LEVEL.hard;
+
     const noOfColorSquares = 6;
     let noOfVisibleSquares = 6;
+    const totalScore = LEVEL.hard * noOfVisibleSquares;
     const bodyClr = "#15151b";
     const borderClr = "#f8f9fa";
     let winningColor;
@@ -26,7 +35,8 @@ $(document).ready(function main() {
     const resetElem = document.querySelector(".new-colors");
     const jumbotron = document.querySelector(".jumbotron");
     const levelElems = document.querySelectorAll(".level");
-    const infoElem = document.querySelector(".info");
+    const scoreInfoElem = document.querySelector(".info-score");
+    const roundInfoElem = document.querySelector(".info-round");
 
     const getRandomInt = (minInclusive, maxExclusive) => {
       const minInt = Math.ceil(minInclusive);
@@ -56,16 +66,10 @@ $(document).ready(function main() {
     };
 
     const setSameColorOnSquares = () => {
-      /*  squares.forEach(e => {
-        setBgrColor(winningColor, e);
-      }); */
       for (let i = 0; i < noOfColorSquares; i++) {
         if (i < noOfVisibleSquares) {
           setBgrColor(winningColor, squares[i]);
         }
-        /* else {
-          hide(squares[i]);
-        } */
       }
     };
 
@@ -75,17 +79,26 @@ $(document).ready(function main() {
       e.style.borderColor = bodyClr;
     };
 
+    const isFinalRound = () => {
+      return currentRound >= ROUNDS_LIMIT;
+    };
+
     const processClickedSquare = sqr => {
-      if (currentStatus === GAME_STATUS.over) return;
+      if (currentRoundStatus === ROUND_STATUS.over) return;
 
       if (isWinner(Number(sqr.dataset.id))) {
         setSameColorOnSquares();
         setBgrColor(winningColor, jumbotron);
         resetElem.textContent = "Play again?";
-        currentStatus = GAME_STATUS.over;
+        currentRoundStatus = ROUND_STATUS.over;
+        /* if (isFinalRound()) {
+          currentGameStatus = GAME_STATUS.over;
+        } */
       } else {
         hide(sqr);
       }
+
+      roundInfoElem.textContent = currentRound;
     };
 
     const setData = (elem, property, val) => {
@@ -117,8 +130,19 @@ $(document).ready(function main() {
       });
     };
 
+    const updateRoundsCount = () => {
+      if (isFinalRound()) {
+        currentRound = 1;
+        currentGameStatus = GAME_STATUS.over;
+      } else {
+        currentRound++;
+      }
+    };
+
     const reset = () => {
-      currentStatus = GAME_STATUS.on;
+      updateRoundsCount();
+      roundInfoElem.textContent = currentRound; // display
+      currentRoundStatus = ROUND_STATUS.on;
       noOfVisibleSquares = currentLevel;
       jumbotron.style.backgroundColor = "";
       resetElem.textContent = "NEW COLORS";
@@ -139,7 +163,7 @@ $(document).ready(function main() {
           elem.classList.toggle("selected");
         });
         currentLevel = toggleLevel();
-        infoElem.textContent = currentLevel;
+        currentRound = ROUNDS_LIMIT;
         reset();
       }
     };
@@ -153,7 +177,6 @@ $(document).ready(function main() {
     };
 
     const init = () => {
-      // currentLevel = LEVEL.hard;
       reset();
       addListenersToSquares();
       addOtherlisteners();
