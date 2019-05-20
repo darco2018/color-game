@@ -25,7 +25,8 @@ $(document).ready(function main() {
 
     const noOfColorSquares = 6;
     let noOfVisibleSquares = 6;
-    const totalScore = LEVEL.hard * noOfVisibleSquares;
+    let totalScore = LEVEL.hard * ROUNDS_LIMIT;
+    let currentScore = LEVEL.hard * ROUNDS_LIMIT;
     const bodyClr = "#15151b";
     const borderClr = "#f8f9fa";
     let winningColor;
@@ -83,21 +84,30 @@ $(document).ready(function main() {
       return currentRound >= ROUNDS_LIMIT;
     };
 
+    const updateRoundsCount = () => {
+      if (isFinalRound()) {
+        currentGameStatus = GAME_STATUS.over;
+        currentRound = 1;
+        currentScore = totalScore;
+        resetElem.textContent = "NEW GAME";
+      } else {
+        currentRound++;
+      }
+    };
+
     const processClickedSquare = sqr => {
       if (currentRoundStatus === ROUND_STATUS.over) return;
 
       if (isWinner(Number(sqr.dataset.id))) {
         setSameColorOnSquares();
         setBgrColor(winningColor, jumbotron);
-        resetElem.textContent = "Play again?";
+        resetElem.textContent = isFinalRound() ? "NEW GAME" : "NEXT ROUND";
         currentRoundStatus = ROUND_STATUS.over;
-        /* if (isFinalRound()) {
-          currentGameStatus = GAME_STATUS.over;
-        } */
       } else {
         hide(sqr);
+        currentScore -= 1;
       }
-
+      scoreInfoElem.textContent = `${currentScore}/${totalScore}`;
       roundInfoElem.textContent = currentRound;
     };
 
@@ -130,22 +140,15 @@ $(document).ready(function main() {
       });
     };
 
-    const updateRoundsCount = () => {
-      if (isFinalRound()) {
-        currentRound = 1;
-        currentGameStatus = GAME_STATUS.over;
-      } else {
-        currentRound++;
-      }
-    };
-
     const reset = () => {
       updateRoundsCount();
       roundInfoElem.textContent = currentRound; // display
+      scoreInfoElem.textContent = `${currentScore}/${totalScore}`;
+      currentGameStatus = GAME_STATUS.on;
       currentRoundStatus = ROUND_STATUS.on;
       noOfVisibleSquares = currentLevel;
       jumbotron.style.backgroundColor = "";
-      resetElem.textContent = "NEW COLORS";
+      resetElem.textContent = isFinalRound() ? "NEW GAME" : "CHANGE COLORS";
       setBgrColorsAndDataOnSquares();
       setWinningColorAndWinningId();
       setBgrColor(winningColor, squares[winningId]);
@@ -154,6 +157,8 @@ $(document).ready(function main() {
     };
 
     const toggleLevel = () => {
+      /*  noOfVisibleSquares =
+        noOfVisibleSquares === LEVEL.hard ? LEVEL.easy : LEVEL.hard; */
       return currentLevel === LEVEL.hard ? LEVEL.easy : LEVEL.hard;
     };
 
@@ -163,13 +168,20 @@ $(document).ready(function main() {
           elem.classList.toggle("selected");
         });
         currentLevel = toggleLevel();
+        totalScore = currentLevel * ROUNDS_LIMIT;
+        currentScore = totalScore;
         currentRound = ROUNDS_LIMIT;
         reset();
       }
     };
 
     const addOtherlisteners = () => {
-      resetElem.addEventListener("click", reset);
+      resetElem.addEventListener("click", () => {
+        if (resetElem.textContent === "CHANGE COLORS") {
+          currentScore -= 2;
+        }
+        reset();
+      });
 
       levelElems.forEach(elem => {
         elem.addEventListener("click", processLevelBtns);
@@ -177,6 +189,7 @@ $(document).ready(function main() {
     };
 
     const init = () => {
+      scoreInfoElem.textContent = `${currentScore}/${totalScore}`;
       reset();
       addListenersToSquares();
       addOtherlisteners();
