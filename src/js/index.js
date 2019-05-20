@@ -5,7 +5,18 @@ $(document).ready(function main() {
   const colorGame = (() => {
     const rgbLowerBound = 0;
     const rgbUpperBound = 256;
+    const GAME_STATUS = {
+      over: 0,
+      on: 1,
+    };
+    let currentStatus = GAME_STATUS.on;
+    const LEVEL = {
+      easy: 3,
+      hard: 6,
+    };
+    let currentLevel = LEVEL.hard;
     const noOfColorSquares = 6;
+    let noOfVisibleSquares = 6;
     const bodyClr = "#15151b";
     const borderClr = "#f8f9fa";
     let winningColor;
@@ -15,6 +26,7 @@ $(document).ready(function main() {
     const resetElem = document.querySelector(".new-colors");
     const jumbotron = document.querySelector(".jumbotron");
     const levelElems = document.querySelectorAll(".level");
+    const infoElem = document.querySelector(".info");
 
     const getRandomInt = (minInclusive, maxExclusive) => {
       const minInt = Math.ceil(minInclusive);
@@ -44,9 +56,17 @@ $(document).ready(function main() {
     };
 
     const setSameColorOnSquares = () => {
-      squares.forEach(e => {
+      /*  squares.forEach(e => {
         setBgrColor(winningColor, e);
-      });
+      }); */
+      for (let i = 0; i < noOfColorSquares; i++) {
+        if (i < noOfVisibleSquares) {
+          setBgrColor(winningColor, squares[i]);
+        }
+        /* else {
+          hide(squares[i]);
+        } */
+      }
     };
 
     const hide = elem => {
@@ -56,11 +76,13 @@ $(document).ready(function main() {
     };
 
     const processClickedSquare = sqr => {
-      const squareId = Number(sqr.dataset.id);
-      if (isWinner(squareId)) {
+      if (currentStatus === GAME_STATUS.over) return;
+
+      if (isWinner(Number(sqr.dataset.id))) {
         setSameColorOnSquares();
         setBgrColor(winningColor, jumbotron);
         resetElem.textContent = "Play again?";
+        currentStatus = GAME_STATUS.over;
       } else {
         hide(sqr);
       }
@@ -72,15 +94,19 @@ $(document).ready(function main() {
     };
 
     const setBgrColorsAndDataOnSquares = () => {
-      squares.forEach((e, i) => {
-        setBgrColor(getRandomRgbColor(), e);
-        setData(e, "id", i);
-      });
+      for (let i = 0; i < noOfColorSquares; i++) {
+        if (i < noOfVisibleSquares) {
+          setBgrColor(getRandomRgbColor(), squares[i]);
+          setData(squares[i], "id", i);
+        } else {
+          hide(squares[i]);
+        }
+      }
     };
 
     const setWinningColorAndWinningId = () => {
       winningColor = getRandomRgbColor();
-      winningId = getRandomInt(0, noOfColorSquares);
+      winningId = getRandomInt(0, noOfVisibleSquares);
     };
 
     const addListenersToSquares = () => {
@@ -92,6 +118,8 @@ $(document).ready(function main() {
     };
 
     const reset = () => {
+      currentStatus = GAME_STATUS.on;
+      noOfVisibleSquares = currentLevel;
       jumbotron.style.backgroundColor = "";
       resetElem.textContent = "NEW COLORS";
       setBgrColorsAndDataOnSquares();
@@ -101,11 +129,18 @@ $(document).ready(function main() {
       console.log(`${winningColor}, winning id: ${winningId}}`);
     };
 
-    const switchLevel = function fn() {
+    const toggleLevel = () => {
+      return currentLevel === LEVEL.hard ? LEVEL.easy : LEVEL.hard;
+    };
+
+    const processLevelBtns = function fn() {
       if (!this.classList.contains("selected")) {
         levelElems.forEach(elem => {
           elem.classList.toggle("selected");
         });
+        currentLevel = toggleLevel();
+        infoElem.textContent = currentLevel;
+        reset();
       }
     };
 
@@ -113,12 +148,12 @@ $(document).ready(function main() {
       resetElem.addEventListener("click", reset);
 
       levelElems.forEach(elem => {
-        elem.addEventListener("click", switchLevel);
+        elem.addEventListener("click", processLevelBtns);
       });
     };
 
     const init = () => {
-      console.log(levelElems);
+      // currentLevel = LEVEL.hard;
       reset();
       addListenersToSquares();
       addOtherlisteners();
