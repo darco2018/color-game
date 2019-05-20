@@ -6,15 +6,15 @@ $(document).ready(function main() {
     const rgbLowerBound = 0;
     const rgbUpperBound = 256;
     const noOfColorSquares = 6;
-    const squares = document.querySelectorAll(".square");
-    const resetElem = document.querySelector(".new-colors");
-    const jumbotron = document.querySelector(".jumbotron");
-    const displayElem = ".rgb-text";
-    const jumbotronColor = "steelblue";
     const bodyClr = "#15151b";
     const borderClr = "#f8f9fa";
     let winningColor;
-    let winningId;
+    let winningId = -1;
+    const displayElem = ".rgb-text";
+    const squares = document.querySelectorAll(".square");
+    const resetElem = document.querySelector(".new-colors");
+    const jumbotron = document.querySelector(".jumbotron");
+    const levelElems = document.querySelectorAll(".level");
 
     const getRandomInt = (minInclusive, maxExclusive) => {
       const minInt = Math.ceil(minInclusive);
@@ -101,11 +101,24 @@ $(document).ready(function main() {
       console.log(`${winningColor}, winning id: ${winningId}}`);
     };
 
+    const switchLevel = function fn() {
+      if (!this.classList.contains("selected")) {
+        levelElems.forEach(elem => {
+          elem.classList.toggle("selected");
+        });
+      }
+    };
+
     const addOtherlisteners = () => {
       resetElem.addEventListener("click", reset);
+
+      levelElems.forEach(elem => {
+        elem.addEventListener("click", switchLevel);
+      });
     };
 
     const init = () => {
+      console.log(levelElems);
       reset();
       addListenersToSquares();
       addOtherlisteners();
