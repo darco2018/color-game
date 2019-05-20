@@ -8,7 +8,11 @@ $(document).ready(function main() {
     const noOfColorSquares = 6;
     const squares = document.querySelectorAll(".square");
     const resetElem = document.querySelector(".new-colors");
+    const jumbotron = document.querySelector(".jumbotron");
     const displayElem = ".rgb-text";
+    const jumbotronColor = "steelblue";
+    const bodyClr = "#15151b";
+    const borderClr = "#f8f9fa";
     let winningColor;
     let winningId;
 
@@ -36,7 +40,7 @@ $(document).ready(function main() {
     const setBgrColor = (color, elem) => {
       const e = elem;
       e.style.backgroundColor = color;
-      e.style.visibility = "visible";
+      e.style.borderColor = borderClr;
     };
 
     const setSameColorOnSquares = () => {
@@ -47,13 +51,16 @@ $(document).ready(function main() {
 
     const hide = elem => {
       const e = elem;
-      e.style.visibility = "hidden";
+      e.style.backgroundColor = bodyClr;
+      e.style.borderColor = bodyClr;
     };
 
     const processClickedSquare = sqr => {
       const squareId = Number(sqr.dataset.id);
       if (isWinner(squareId)) {
         setSameColorOnSquares();
+        setBgrColor(winningColor, jumbotron);
+        resetElem.textContent = "Play again?";
       } else {
         hide(sqr);
       }
@@ -85,6 +92,8 @@ $(document).ready(function main() {
     };
 
     const reset = () => {
+      jumbotron.style.backgroundColor = "";
+      resetElem.textContent = "NEW COLORS";
       setBgrColorsAndDataOnSquares();
       setWinningColorAndWinningId();
       setBgrColor(winningColor, squares[winningId]);

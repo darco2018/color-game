@@ -1,8 +1,13 @@
 /** @format */
 @import url("../../node_modules/bootstrap/dist/css/bootstrap.min.css");
-
+:root {
+  --primary: steelblue;
+  --light: #f8f9fa;
+  --bodyClr: #15151b;
+}
 body {
-  background: #15151b;
+  background: var(--bodyClr);
+  font-family: "Montserrat", "Avenir", sans-serif;
 }
 
 a:link,
@@ -74,13 +79,15 @@ a:active {
 }
 
 .square {
-  background: green;
+  opacity: 1;
+  background-color: green;
   border: 2px solid var(--light);
   margin: 0.4rem;
   border-radius: 10%;
   width: 10rem;
   height: 10rem;
   display: inline-block;
+  transition: background-color 0.5s;
 }
 
 .h1,
