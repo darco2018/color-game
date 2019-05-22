@@ -1,6 +1,6 @@
 /** @format */
 
-//@import url("normalize.css"); not working
+@import url("normalize.css"); //not working
 /**
  * ! HTML5 Boilerplate v7.1.0 | MIT License | https://html5boilerplate.com/
  *
@@ -100,20 +100,19 @@ textarea {
 /* ==========================================================================
    Author's custom styles
    ========================================================================== */
-$newcolor: green;
+$newcolor: yellow;
 :root {
   --primary: steelblue;
   --light: #f8f9fa;
   // --bodyClr: #15151b;
   --bodyClr: teal;
 }
+h1 {
+  color: red;
+}
 body {
   background: $newcolor;
   font-family: "Montserrat", "Avenir", sans-serif;
-}
-h1,
-p {
-  color: white;
 }
 
 /* .menu--right > a:nth-child(1) {
