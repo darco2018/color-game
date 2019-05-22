@@ -110,8 +110,12 @@ body {
   background: var(--bodyClr);
   font-family: "Montserrat", "Avenir", sans-serif;
 }
+h1,
+p {
+  color: white;
+}
 
-.menu--right > a:nth-child(1) {
+/* .menu--right > a:nth-child(1) {
   margin-right: -5px;
 }
 .jumbotron {
@@ -242,7 +246,7 @@ h2 {
   h2 {
     font-size: 1.3rem;
   }
-}
+} */
 
 /* ==========================================================================
    Helper classes

@@ -1,8 +1,15 @@
 /** @format */
-import "../css/index.css";
+import "../css/main.css";
 
 document.addEventListener("DOMContentLoaded", () => {
   const colorGame = (() => {
+    const displayElem = ".rgb-values";
+    const squares = document.querySelectorAll(".square");
+    const resetElem = document.querySelector(".btn-reset");
+    const jumbotron = document.querySelector(".jumbotron");
+    const levelElems = document.querySelectorAll(".btn-level");
+    const scoreInfoElem = document.querySelector(".info-score");
+    const roundInfoElem = document.querySelector(".info-round");
     const ROUNDS_LIMIT = 5;
     let currentRound = 0;
     const rgbLowerBound = 0;
@@ -31,13 +38,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const borderClr = "#f8f9fa";
     let winningColor;
     let winningId = -1;
-    const displayElem = ".rgb-text";
-    const squares = document.querySelectorAll(".square");
-    const resetElem = document.querySelector(".new-colors");
-    const jumbotron = document.querySelector(".jumbotron");
-    const levelElems = document.querySelectorAll(".level");
-    const scoreInfoElem = document.querySelector(".info-score");
-    const roundInfoElem = document.querySelector(".info-round");
 
     const getRandomInt = (minInclusive, maxExclusive) => {
       const minInt = Math.ceil(minInclusive);

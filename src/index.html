@@ -27,41 +27,46 @@
     <main>
       <!-- // [START jumbotron]  -->
       <section class="jumbotron">
-        <hgroup>
-          <h2>THE GREAT</h2>
-          <h1><span class="rgb-text">RGB(175, 203, 2)</span></h1>
-          <h2>GUESSING GAME</h2>
-        </hgroup>
+        <h1>
+          THE GREAT<br />
+          <span class="rgb-values">RGB(175, 203, 2)</span><br />
+          GUESSING GAME
+        </h1>
       </section>
       <!-- // [END jumbotron]  -->
       <!-- // [START controls]  -->
       <section class="controls-bar">
-        <div class="menus-wrapper">
-          <div class="menu--left">
-            <button class="new-colors control-btn" href="#"></button>
-          </div>
-          score:<span class="info-score"></span> ,&nbspround:&nbsp;
-          <span class="info-round"></span>/5
-          <div class="menu--right">
-            <button class="control-btn level" href="#">EASY</button>
-            <button class="control-btn level selected" href="#">HARD</button>
-          </div>
+        <div class="controls--left">
+          <button class="controls-bar__button btn-reset"></button>
+        </div>
+        <div class="controls--right">
+          <button class="controls-bar__button btn-level">
+            EASY
+          </button>
+          <button class="controls-bar__button btn-level selected">
+            HARD
+          </button>
         </div>
       </section>
       <!-- // [END controls]  -->
-
-      <!-- // [START color-boxes]  -->
-      <section class="color-boxes">
-        <div class="squares-wrapper">
-          <div class="square"></div>
-          <div class="square"></div>
-          <div class="square"></div>
-          <div class="square"></div>
-          <div class="square"></div>
-          <div class="square"></div>
-        </div>
+      <!-- // [START info]  -->
+      <section class="info-bar">
+        <p>
+          score:<span class="info-score"></span> ,&nbsp;round:&nbsp;
+          <span class="info-round"></span>/5
+        </p>
       </section>
-      <!-- // [END color-boxes]  -->
+      <!-- // [END info]  -->
+      <!-- // [START squares]  -->
+      <section class="squares-wrapper">
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+      </section>
+      <!-- // [END squares]  -->
     </main>
     <!-- // [END main]  -->
     <script src="js/vendor/modernizr-3.7.1.min.js"></script>
