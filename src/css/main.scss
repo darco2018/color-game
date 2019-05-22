@@ -113,6 +113,8 @@ $colors: (
   dark: #15151b
 );
 
+$middleWrapperMaxWidth: 600px;
+
 body {
   background-color: map-get($colors, dark);
   // $primary when no map, use dollar for var
@@ -120,19 +122,40 @@ body {
   font-family: "Montserrat", "Avenir", sans-serif;
 
   .squares-wrapper {
-    max-width: 600px;
+    max-width: $middleWrapperMaxWidth;
     margin: 0 auto;
+    padding: 0;
     border: 2px solid red;
     background-color: yellowgreen;
   }
   .square {
     background-color: teal;
-    width: 30%;
+    border: 2px solid map-get($colors, accent);
+    width: 29%;
     padding-bottom: 30%;
-    margin: 1.66%;
+    margin: 1.4%;
     float: left;
   }
 }
+
+.controls-bar {
+  max-width: $middleWrapperMaxWidth;
+  margin: 0 auto;
+  padding: 0;
+
+  .controls--left {
+    float: left;
+  }
+  .controls--right {
+    float: right;
+  }
+}
+
+.info-bar {
+  text-align: center;
+  text-transform: capitalize;
+}
+
 .jumbotron {
   background-color: map-get($colors, primary);
 }
