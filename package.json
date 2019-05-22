@@ -27,9 +27,7 @@
     "build": "webpack --env production"
   },
   "dependencies": {
-    "jquery": "3.4.0",
-    "lodash": "^4.17.11",
-    "popper.js": "1.14.7"
+    "lodash": "^4.17.11"
   },
   "devDependencies": {
     "@babel/cli": "^7.4.4",

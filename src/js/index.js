@@ -1,7 +1,7 @@
 /** @format */
 import "../css/index.css";
 
-$(document).ready(function main() {
+document.addEventListener("DOMContentLoaded", () => {
   const colorGame = (() => {
     const ROUNDS_LIMIT = 5;
     let currentRound = 0;
