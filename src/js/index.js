@@ -1,5 +1,5 @@
 /** @format */
-import "../css/main.css";
+import "../css/main.scss";
 
 document.addEventListener("DOMContentLoaded", () => {
   const colorGame = (() => {

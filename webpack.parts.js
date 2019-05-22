@@ -119,7 +119,7 @@ exports.extractCSS = ({ include, exclude, use = [] }) => {
     module: {
       rules: [
         {
-          test: /\.css$/,
+          test: /\.scss$/,
           include,
           exclude,
           use: [MiniCssExtractPlugin.loader].concat(use), //  a CSS file per JS file
@@ -163,10 +163,14 @@ exports.loadCSS = ({ include, exclude } = {}) => ({
   module: {
     rules: [
       {
-        test: /\.css$/,
+        test: /\.scss$/,
         include,
         exclude,
-        use: ["style-loader", "css-loader"],
+        use: [
+          "style-loader", // creates style nodes from JS strings
+          "css-loader", // translates CSS into CommonJS
+          "sass-loader", // compiles Sass to CSS, using Node Sass by default
+        ],
       },
     ],
   },

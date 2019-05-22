@@ -49,7 +49,7 @@ const productionConfig = merge([
   parts.babel({ include: PATHS.app }),
   // prod only:
   parts.extractCSS({
-    use: ["css-loader", parts.nextGenerationCss()], // if it works: pageOne.css should have only one keyframes
+    use: ["css-loader", parts.nextGenerationCss(), "sass-loader"], // if it works: pageOne.css should have only one keyframes
   }),
   parts.purifyCSS({
     // must be AFTER extraction. It decreases the .css file with purecss, bootstrap, etc.
