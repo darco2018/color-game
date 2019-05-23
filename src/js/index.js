@@ -10,6 +10,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const levelElems = document.querySelectorAll(".btn-level");
     const scoreInfoElem = document.querySelector(".info-score");
     const roundInfoElem = document.querySelector(".info-round");
+    const helpBtn = document.querySelector(".btn-help");
+    const rgbimgElem = document.querySelector(".rgbimg-wrapper");
     const ROUNDS_LIMIT = 5;
     let currentRound = 0;
     const rgbLowerBound = 0;
@@ -148,7 +150,7 @@ document.addEventListener("DOMContentLoaded", () => {
       currentRoundStatus = ROUND_STATUS.on;
       noOfVisibleSquares = currentLevel;
       jumbotron.style.backgroundColor = "";
-      resetElem.textContent = isFinalRound() ? "NEW GAME" : "CHANGE COLORS";
+      resetElem.textContent = isFinalRound() ? "NEW GAME" : "NEW COLORS";
       setBgrColorsAndDataOnSquares();
       setWinningColorAndWinningId();
       setBgrColor(winningColor, squares[winningId]);
@@ -177,7 +179,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const addOtherlisteners = () => {
       resetElem.addEventListener("click", () => {
-        if (resetElem.textContent === "CHANGE COLORS") {
+        if (resetElem.textContent === "NEW COLORS") {
           currentScore -= 2;
         }
         reset();
@@ -185,6 +187,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
       levelElems.forEach(elem => {
         elem.addEventListener("click", processLevelBtns);
+      });
+
+      helpBtn.addEventListener("click", () => {
+        console.log("Hi");
+
+        rgbimgElem.innerHTML =
+          "<img src='img/rgb200-200.png' alt='rgb color model'>";
       });
     };
 
