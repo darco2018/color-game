@@ -117,25 +117,22 @@ $middleWrapperMaxWidth: 600px;
 
 body {
   background-color: map-get($colors, dark);
-  // $primary when no map, use dollar for var
   color: map-get($colors, accent);
   font-family: "Montserrat", "Avenir", sans-serif;
 
-  .squares-wrapper {
-    max-width: $middleWrapperMaxWidth;
-    margin: 0 auto;
-    padding: 0;
-    border: 2px solid red;
-    background-color: yellowgreen;
+  .jumbotron {
+    background-color: map-get($colors, primary);
+    max-height: 130px;
+    text-align: center;
+    letter-spacing: 2px;
+    line-height: 1.8rem;
+    padding: 0.1rem 0;
+    margin-bottom: 2rem;
   }
-  .square {
-    background-color: teal;
-    border: 2px solid map-get($colors, accent);
-    width: 29%;
-    padding-bottom: 30%;
-    margin: 1.4%;
-    float: left;
-  }
+}
+
+h1 {
+  font-size: 1.4rem;
 }
 
 .controls-bar {
@@ -149,6 +146,10 @@ body {
   .controls--right {
     float: right;
   }
+
+  .controls-bar__button {
+    margin: 0.25rem;
+  }
 }
 
 .info-bar {
@@ -156,8 +157,23 @@ body {
   text-transform: capitalize;
 }
 
-.jumbotron {
-  background-color: map-get($colors, primary);
+.squares-wrapper {
+  max-width: $middleWrapperMaxWidth;
+  margin: 0 auto;
+  padding: 0;
+
+  // padding-left: 0.6rem;
+  /* border: 2px solid red;
+  background-color: yellowgreen; */
+
+  .square {
+    background-color: teal;
+    border: 2px solid map-get($colors, accent);
+    width: 29%;
+    padding-bottom: 30%;
+    margin: 1.4%;
+    float: left;
+  }
 }
 
 /* .menu--right > a:nth-child(1) {
