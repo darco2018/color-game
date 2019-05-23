@@ -97,19 +97,29 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     };
 
+    const toggleGameOverHighlight = () => {
+      resetElem.classList.toggle("highlight");
+      scoreInfoElem.classList.toggle("highlight");
+    };
+
     const processClickedSquare = sqr => {
       if (currentRoundStatus === ROUND_STATUS.over) return;
 
       if (isWinner(Number(sqr.dataset.id))) {
         setSameColorOnSquares();
         setBgrColor(winningColor, jumbotron);
-        resetElem.textContent = isFinalRound() ? "new game" : "NEXT ROUND";
         currentRoundStatus = ROUND_STATUS.over;
+        //--------------
+        const gameOver = isFinalRound();
+        resetElem.textContent = gameOver ? "new game" : "next round";
+        if (gameOver) {
+          toggleGameOverHighlight();
+        }
       } else {
         hide(sqr);
         currentScore -= 1;
       }
-      scoreInfoElem.textContent = `${currentScore}/${totalScore}`;
+      scoreInfoElem.textContent = `${currentScore} / ${totalScore}`;
       roundInfoElem.textContent = currentRound;
     };
 
@@ -145,12 +155,19 @@ document.addEventListener("DOMContentLoaded", () => {
     const reset = () => {
       updateRoundsCount();
       roundInfoElem.textContent = currentRound; // display
-      scoreInfoElem.textContent = `${currentScore}/${totalScore}`;
+      scoreInfoElem.textContent = `${currentScore} / ${totalScore}`;
       currentGameStatus = GAME_STATUS.on;
       currentRoundStatus = ROUND_STATUS.on;
       noOfVisibleSquares = currentLevel;
       jumbotron.style.backgroundColor = "";
       resetElem.textContent = isFinalRound() ? "new game" : "new colors";
+      //  222
+      /* const gameOver = isFinalRound();
+      resetElem.textContent = gameOver ? "new game" : "new colors"; */
+      if (resetElem.classList.contains("highlight")) {
+        toggleGameOverHighlight();
+      }
+      //-----------
       setBgrColorsAndDataOnSquares();
       setWinningColorAndWinningId();
       setBgrColor(winningColor, squares[winningId]);
@@ -198,7 +215,7 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     const init = () => {
-      scoreInfoElem.textContent = `${currentScore}/${totalScore}`;
+      scoreInfoElem.textContent = `${currentScore} / ${totalScore}`;
       reset();
       addListenersToSquares();
       addOtherlisteners();

@@ -130,6 +130,10 @@ body {
     padding: 0.1rem 0;
     margin-bottom: 0;
   }
+
+  .rgb-values {
+    color: map-get($colors, dark);
+  }
 }
 
 h1 {
@@ -138,36 +142,48 @@ h1 {
 
 .controls-bar {
   background-color: map-get($colors, primary);
-  max-width: $middleWrapperMaxWidth;
-  margin: 0 auto;
-  padding: 0;
 
-  .controls--left {
-    // margin: 0 2px 0 6px;
-    float: left;
-  }
-  .controls--right {
-    // margin: 0 0 0 2px;
-    float: right;
-  }
+  .controls-wrapper {
+    max-width: $middleWrapperMaxWidth;
+    margin: 0 auto;
+    padding: 0;
 
-  .controls-bar__button {
-    background-color: map-get($colors, primary);
-    color: map-get($colors, accent);
-    border: none;
-    outline: none;
-    transition-duration: 0.4s;
-    cursor: pointer;
-    font-weight: 800;
-    // letter-spacing: 1px;
-    text-align: center;
-    padding: 0.5rem 0.2rem;
-  }
+    .controls--left {
+      // margin: 0 2px 0 6px;
+      float: left;
+    }
+    .controls--right {
+      // margin: 0 0 0 2px;
+      float: right;
+    }
 
-  .selected {
-    background-color: map-get($colors, accent);
-    color: map-get($colors, primary);
+    .controls-bar__button {
+      text-transform: lowercase;
+      background-color: map-get($colors, primary);
+      color: map-get($colors, accent);
+      border: none;
+      outline: none;
+      transition-duration: 0.4s;
+      cursor: pointer;
+      font-weight: 800;
+      // letter-spacing: 1px;
+      text-align: center;
+      padding: 0.5rem 0.2rem;
+    }
+
+    .controls-bar__button::first-letter {
+      text-transform: capitalize;
+    }
+
+    .selected {
+      background-color: map-get($colors, accent);
+      color: map-get($colors, primary);
+    }
   }
+}
+
+.highlight {
+  color: red !important;
 }
 
 .info-bar {
