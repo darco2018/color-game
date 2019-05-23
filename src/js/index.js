@@ -91,7 +91,7 @@ document.addEventListener("DOMContentLoaded", () => {
         currentGameStatus = GAME_STATUS.over;
         currentRound = 1;
         currentScore = totalScore;
-        resetElem.textContent = "NEW GAME";
+        resetElem.textContent = "new game";
       } else {
         currentRound++;
       }
@@ -103,7 +103,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (isWinner(Number(sqr.dataset.id))) {
         setSameColorOnSquares();
         setBgrColor(winningColor, jumbotron);
-        resetElem.textContent = isFinalRound() ? "NEW GAME" : "NEXT ROUND";
+        resetElem.textContent = isFinalRound() ? "new game" : "NEXT ROUND";
         currentRoundStatus = ROUND_STATUS.over;
       } else {
         hide(sqr);
@@ -150,7 +150,7 @@ document.addEventListener("DOMContentLoaded", () => {
       currentRoundStatus = ROUND_STATUS.on;
       noOfVisibleSquares = currentLevel;
       jumbotron.style.backgroundColor = "";
-      resetElem.textContent = isFinalRound() ? "NEW GAME" : "NEW COLORS";
+      resetElem.textContent = isFinalRound() ? "new game" : "new colors";
       setBgrColorsAndDataOnSquares();
       setWinningColorAndWinningId();
       setBgrColor(winningColor, squares[winningId]);
@@ -179,7 +179,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const addOtherlisteners = () => {
       resetElem.addEventListener("click", () => {
-        if (resetElem.textContent === "NEW COLORS") {
+        if (resetElem.textContent === "new colors") {
           currentScore -= 2;
         }
         reset();
@@ -192,7 +192,7 @@ document.addEventListener("DOMContentLoaded", () => {
       helpBtn.addEventListener("click", () => {
         console.log(this);
         helpBtn.textContent =
-          helpBtn.textContent === "HIDE HELP" ? "HELP" : "HIDE HELP";
+          helpBtn.textContent === "hide help" ? "help" : "hide help";
         rgbimgElem.classList.toggle("hidden");
       });
     };
