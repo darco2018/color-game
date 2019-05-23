@@ -190,10 +190,10 @@ document.addEventListener("DOMContentLoaded", () => {
       });
 
       helpBtn.addEventListener("click", () => {
-        console.log("Hi");
-
-        rgbimgElem.innerHTML =
-          "<img src='img/rgb200-200.png' alt='rgb color model'>";
+        console.log(this);
+        helpBtn.textContent =
+          helpBtn.textContent === "HIDE HELP" ? "HELP" : "HIDE HELP";
+        rgbimgElem.classList.toggle("hidden");
       });
     };
 

@@ -114,6 +114,7 @@ $colors: (
 );
 
 $middleWrapperMaxWidth: 600px;
+$jumboHeight: 130px;
 
 body {
   background-color: map-get($colors, dark);
@@ -122,7 +123,7 @@ body {
 
   .jumbotron {
     background-color: map-get($colors, primary);
-    max-height: 130px;
+    max-height: $jumboHeight;
     text-align: center;
     letter-spacing: 2px;
     line-height: 1.8rem;
@@ -141,15 +142,15 @@ h1 {
   padding: 0;
 
   .controls--left {
+    margin: 0 2px 0 6px;
     float: left;
   }
   .controls--right {
+    margin: 0 0 0 2px;
     float: right;
   }
 
   .controls-bar__button {
-    // margin: 0.25rem;
-    margin: 0rem;
   }
 }
 
@@ -176,13 +177,13 @@ h1 {
     float: left;
   }
 }
-
+//aaa
 .rgbimg-wrapper {
   margin: 0 auto;
   width: 29%;
 
   // border: 2px solid red;
-  background-color: yellow;
+  // background-color: yellow;
 
   img {
     width: 100%;
@@ -410,9 +411,26 @@ h2 {
    These examples override the primary ('mobile first') styles.
    Modify as content requires.
    ========================================================================== */
+// mmm
+@media only screen and (min-width: 510px) {
+  body {
+    // background-color: grey;
+  }
 
-@media only screen and (min-width: 35em) {
-  /* Style adjustments for viewports that meet the condition */
+  $jumboHeight: 120px;
+
+  .rgbimg-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    /* background-color: yellow; */
+
+    img {
+      height: $jumboHeight;
+      width: $jumboHeight;
+    }
+  }
 }
 
 @media print,
