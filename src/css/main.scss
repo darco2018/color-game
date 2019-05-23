@@ -142,11 +142,14 @@ h1 {
 
 .controls-bar {
   background-color: map-get($colors, primary);
+  padding-left: 0.4rem;
+  padding-right: 0.4rem;
 
   .controls-wrapper {
-    max-width: $middleWrapperMaxWidth;
+    max-width: $middleWrapperMaxWidth - 50px;
     margin: 0 auto;
-    padding: 0;
+    // padding-left: 0.9rem;
+    // padding-right: 0.3rem;
 
     .controls--left {
       // margin: 0 2px 0 6px;
@@ -195,6 +198,7 @@ h1 {
   max-width: $middleWrapperMaxWidth;
   margin: 0 auto;
   padding: 0;
+  padding-left: 0.3rem;
 
   // padding-left: 0.6rem;
   /* border: 2px solid red;
@@ -444,9 +448,17 @@ h2 {
    Modify as content requires.
    ========================================================================== */
 // mmm
-@media only screen and (min-width: 510px) {
+@media only screen and (min-width: 570px) {
   body {
-    // background-color: grey;
+    font-size: 1.3rem;
+    padding-top: 0;
+  }
+
+  h1 {
+    font-size: 1.4rem;
+    line-height: 1.95rem;
+    letter-spacing: 0.4rem;
+    margin-top: 0.5rem;
   }
 
   $jumboHeight: 120px;
@@ -455,8 +467,6 @@ h2 {
     position: absolute;
     top: 0;
     left: 0;
-
-    /* background-color: yellow; */
 
     img {
       height: $jumboHeight;
