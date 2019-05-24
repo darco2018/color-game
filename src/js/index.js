@@ -66,6 +66,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const e = elem;
       e.style.backgroundColor = color;
       e.style.borderColor = borderClr;
+      e.classList.remove("transparent");
     };
 
     const setSameColorOnSquares = () => {
@@ -78,8 +79,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const hide = elem => {
       const e = elem;
-      e.style.backgroundColor = bodyClr;
-      e.style.borderColor = bodyClr;
+      e.classList.add("transparent");
+      // e.style.backgroundColor = bodyClr;
+      // e.style.borderColor = bodyClr;
     };
 
     const isFinalRound = () => {
@@ -97,11 +99,6 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     };
 
-    const toggleGameOverHighlight = () => {
-      resetElem.classList.toggle("highlight");
-      scoreInfoElem.classList.toggle("highlight");
-    };
-
     const processClickedSquare = sqr => {
       if (currentRoundStatus === ROUND_STATUS.over) return;
 
@@ -112,8 +109,9 @@ document.addEventListener("DOMContentLoaded", () => {
         //--------------
         const gameOver = isFinalRound();
         resetElem.textContent = gameOver ? "new game" : "next round";
+        resetElem.classList.add("highlight");
         if (gameOver) {
-          toggleGameOverHighlight();
+          scoreInfoElem.classList.toggle("highlight");
         }
       } else {
         hide(sqr);
@@ -161,13 +159,12 @@ document.addEventListener("DOMContentLoaded", () => {
       noOfVisibleSquares = currentLevel;
       jumbotron.style.backgroundColor = "";
       resetElem.textContent = isFinalRound() ? "new game" : "new colors";
-      //  222
-      /* const gameOver = isFinalRound();
-      resetElem.textContent = gameOver ? "new game" : "new colors"; */
+
       if (resetElem.classList.contains("highlight")) {
-        toggleGameOverHighlight();
+        resetElem.classList.remove("highlight");
+        scoreInfoElem.classList.remove("highlight");
       }
-      //-----------
+
       setBgrColorsAndDataOnSquares();
       setWinningColorAndWinningId();
       setBgrColor(winningColor, squares[winningId]);
