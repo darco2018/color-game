@@ -1,6 +1,15 @@
 /** @format */
 import "../css/main.scss";
 
+const utils = require("./utils.js");
+/* 
+var require = function(path) {
+   var exports = module.exports = {
+     ....
+   };
+  return module.exports;
+  };
+ */
 document.addEventListener("DOMContentLoaded", () => {
   const colorGame = (() => {
     const displayElem = document.querySelector(".rgb-values");
@@ -36,22 +45,6 @@ document.addEventListener("DOMContentLoaded", () => {
     let totalScore = LEVEL.hard * ROUNDS_LIMIT;
     let currentScore = LEVEL.hard * ROUNDS_LIMIT;
     let winningId = -1;
-
-    const getRandomInt = (minInclusive, maxExclusive) => {
-      const minInt = Math.ceil(minInclusive);
-      const maxInt = Math.floor(maxExclusive);
-      return Math.floor(Math.random() * (maxInt - minInt)) + minInt;
-    };
-
-    const getRandomRgbColor = () => {
-      const rgbLowerBound = 0;
-      const rgbUpperBound = 256;
-      const red = getRandomInt(rgbLowerBound, rgbUpperBound);
-      const green = getRandomInt(rgbLowerBound, rgbUpperBound);
-      const blue = getRandomInt(rgbLowerBound, rgbUpperBound);
-      const color = `rgb(${red}, ${green}, ${blue})`;
-      return color;
-    };
 
     const isWinner = candidate => {
       return winningId === candidate;
@@ -130,7 +123,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const setBgrColorAndIdOnSquares = () => {
       for (let i = 0; i < noOfColorSquares; i++) {
         if (i < noOfVisibleSquares) {
-          styleBgrAndBorder(getRandomRgbColor(), squares[i]);
+          styleBgrAndBorder(utils.getRandomRgbColor(), squares[i]);
           setId(squares[i], "id", i);
         } else {
           hide(squares[i]);
@@ -139,11 +132,11 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     const calculateWinningId = () => {
-      winningId = getRandomInt(0, noOfVisibleSquares);
+      winningId = utils.getRandomInt(0, noOfVisibleSquares);
     };
 
     const calculateWinningColor = () => {
-      winningColor = getRandomRgbColor();
+      winningColor = utils.getRandomRgbColor();
     };
 
     const addListenersToSquares = () => {
