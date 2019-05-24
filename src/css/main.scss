@@ -157,15 +157,11 @@ h1 {
   .controls-wrapper {
     max-width: $middleWrapperMaxWidth - 50px;
     margin: 0 auto;
-    // padding-left: 0.9rem;
-    // padding-right: 0.3rem;
 
     .controls--left {
-      // margin: 0 2px 0 6px;
       float: left;
     }
     .controls--right {
-      // margin: 0 0 0 2px;
       float: right;
     }
 
@@ -178,7 +174,6 @@ h1 {
       transition-duration: 0.4s;
       cursor: pointer;
       font-weight: 800;
-      // letter-spacing: 1px;
       text-align: center;
       padding: 0.5rem 0.2rem;
     }
@@ -209,10 +204,6 @@ h1 {
   padding: 0;
   padding-left: 0.3rem;
 
-  // padding-left: 0.6rem;
-  /* border: 2px solid red;
-  background-color: yellowgreen; */
-
   .square {
     background-color: teal;
     border: 2px solid map-get($colors, accent);
@@ -226,13 +217,10 @@ h1 {
     opacity: 0;
   }
 }
-//aaa
+
 .rgbimg-wrapper {
   margin: 0 auto;
   width: 29%;
-
-  // border: 2px solid red;
-  // background-color: yellow;
 
   img {
     width: 100%;
@@ -241,139 +229,6 @@ h1 {
     overflow: hidden;
   }
 }
-
-/* .menu--right > a:nth-child(1) {
-  margin-right: -5px;
-}
-.jumbotron {
-  text-align: center;
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
-  background: var(--primary);
-  color: var(--light);
-  margin: 0;
-}
-
-.controls-bar {
-  height: 26px;
-  background-color: var(--light);
-  font-weight: bold;
-  margin: 0;
-  padding: 0;
-}
-
-.menus-wrapper {
-  text-align: center;
-  max-width: 670px;
-  margin: 0 auto;
-  padding: 0;
-}
-.menu--left {
-  float: left;
-  margin: 0;
-  padding: 0;
-}
-
-.menu--right {
-  float: right;
-  margin: 0;
-  padding: 0;
-}
-
-.control-btn {
-  background-color: var(--light);
-  color: var(--primary);
-  font-weight: 800;
-  letter-spacing: 1px;
-  text-align: center;
-  display: inline-block;
-  height: 100%;
-  margin: 0 -3px;
-  padding: 2px 10px 0 10px;
-  border: none;
-  outline: none;
-  transition-duration: 0.4s;
-  cursor: pointer;
-}
-
-.control-btn:hover {
-  background-color: var(--primary);
-  color: var(--light);
-}
-
-.selected {
-  background-color: var(--primary);
-  color: var(--light);
-}
-
-.squares-wrapper {
-  clear: both;
-  text-align: center;
-  padding: 1rem;
-  max-width: 930px;
-  margin: 0.5rem auto 0 auto;
-}
-
-.square {
-  opacity: 1;
-  background-color: green;
-  border: 2px solid var(--light);
-  margin: 0.4rem;
-  border-radius: 10%;
-  width: 10rem;
-  height: 10rem;
-  display: inline-block;
-  transition: background-color 0.5s;
-}
-
-.h1,
-h1 {
-  font-size: 1.8rem;
-}
-
-.h2,
-h2 {
-  font-size: 1rem;
-}
-
-@media (min-width: 620px) {
-  .square {
-    background: grey;
-    margin: 0.4rem;
-    width: 10.7rem;
-    height: 10.7rem;
-  }
-
-  .squares-wrapper {
-    max-width: 760px;
-    padding-left: 1rem;
-    padding-right: 1rem;
-    padding-top: 2rem;
-  }
-}
-
-@media (min-width: 800px) {
-  .menus-wrapper {
-    max-width: 930px;
-    padding: 0rem 8rem;
-  }
-  .square {
-    background: green;
-    margin: 0.5rem;
-    width: 13rem;
-    height: 13rem;
-  }
-
-  .h1,
-  h1 {
-    font-size: 2.5rem;
-  }
-
-  .h2,
-  h2 {
-    font-size: 1.3rem;
-  }
-} */
 
 /* ==========================================================================
    Helper classes
