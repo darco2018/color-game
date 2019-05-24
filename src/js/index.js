@@ -115,9 +115,8 @@ document.addEventListener("DOMContentLoaded", () => {
       roundInfoElem.textContent = currentRound;
     };
 
-    const setId = (elem, property, val) => {
-      const element = elem;
-      element.dataset[property] = val;
+    const setId = (elem, attr, val) => {
+      utils.addDataAttribute(elem, attr, val);
     };
 
     const setBgrColorAndIdOnSquares = () => {
@@ -158,7 +157,6 @@ document.addEventListener("DOMContentLoaded", () => {
       setBgrColorAndIdOnSquares();
       styleBgrAndBorder(winningColor, squares[winningId]);
       displayElem.textContent = winningColor;
-      // console.log(`${winningColor}, winning id: ${winningId}}`);
     };
 
     const reset = () => {

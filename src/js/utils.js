@@ -3,6 +3,11 @@
 // const exports = (module.exports = {});
 
 exports.getRandomInt = (minInclusive, maxExclusive) => {
+  if (!(typeof minInclusive === "number"))
+    throw Error("invalid argument: minInclusive must be a number");
+  if (!(typeof maxExclusive === "number"))
+    throw Error("invalid argument: maxExclusive must be a number");
+
   const minInt = Math.ceil(minInclusive);
   const maxInt = Math.floor(maxExclusive);
   return Math.floor(Math.random() * (maxInt - minInt)) + minInt;
@@ -17,7 +22,32 @@ exports.getRandomRgbColor = () => {
   const color = `rgb(${red}, ${green}, ${blue})`;
   return color;
 };
-/* 
+
+/**
+ * @param {HTMLElement} elem
+ * @param {string} attribute
+ */
+exports.addDataAttribute = (elem, attribute, val) => {
+  if (!(typeof attribute === "string"))
+    throw Error("invalid argument: attribute must be a String");
+  const element = elem;
+  element.dataset[attribute] = val;
+};
+
+/* WAY 2
+
+const getRandomInt = sentence => {
+  some code...
+};
+module.exports = getRandomInt;    << function assigned
+    and then:
+const toLowerCase = require('./toLowerCase.js');
+toLowerCase('Hello World!');   << module.exports is a function, so no need to call it on an object
+
+ */
+
+/* WAY 3
+
 module.exports = {
     getRandomInt: (minInclusive, maxExclusive) => {
       const minInt = Math.ceil(minInclusive);
