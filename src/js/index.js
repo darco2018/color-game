@@ -3,7 +3,7 @@ import "../css/main.scss";
 
 document.addEventListener("DOMContentLoaded", () => {
   const colorGame = (() => {
-    const displayElem = ".rgb-values";
+    const displayElem = document.querySelector(".rgb-values");
     const squares = document.querySelectorAll(".square");
     const resetElem = document.querySelector(".btn-reset");
     const jumbotron = document.querySelector(".jumbotron");
@@ -12,10 +12,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const roundInfoElem = document.querySelector(".info-round");
     const helpBtn = document.querySelector(".btn-help");
     const rgbimgElem = document.querySelector(".rgbimg-wrapper");
+    const borderClr = "#f8f9fa";
+    let winningColor = "";
     const ROUNDS_LIMIT = 5;
     let currentRound = 0;
-    const rgbLowerBound = 0;
-    const rgbUpperBound = 256;
     const GAME_STATUS = {
       over: 0,
       on: 1,
@@ -31,14 +31,10 @@ document.addEventListener("DOMContentLoaded", () => {
       hard: 6,
     };
     let currentLevel = LEVEL.hard;
-
     const noOfColorSquares = 6;
     let noOfVisibleSquares = 6;
     let totalScore = LEVEL.hard * ROUNDS_LIMIT;
     let currentScore = LEVEL.hard * ROUNDS_LIMIT;
-    const bodyClr = "#15151b";
-    const borderClr = "#f8f9fa";
-    let winningColor;
     let winningId = -1;
 
     const getRandomInt = (minInclusive, maxExclusive) => {
@@ -48,6 +44,8 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     const getRandomRgbColor = () => {
+      const rgbLowerBound = 0;
+      const rgbUpperBound = 256;
       const red = getRandomInt(rgbLowerBound, rgbUpperBound);
       const green = getRandomInt(rgbLowerBound, rgbUpperBound);
       const blue = getRandomInt(rgbLowerBound, rgbUpperBound);
@@ -55,33 +53,34 @@ document.addEventListener("DOMContentLoaded", () => {
       return color;
     };
 
-    const showOnPage = (color, selector) => {
-      document.querySelector(selector).textContent = color;
-    };
-
     const isWinner = candidate => {
       return winningId === candidate;
-    };
-    const setBgrColor = (color, elem) => {
-      const e = elem;
-      e.style.backgroundColor = color;
-      e.style.borderColor = borderClr;
-      e.classList.remove("transparent");
-    };
-
-    const setSameColorOnSquares = () => {
-      for (let i = 0; i < noOfColorSquares; i++) {
-        if (i < noOfVisibleSquares) {
-          setBgrColor(winningColor, squares[i]);
-        }
-      }
     };
 
     const hide = elem => {
       const e = elem;
       e.classList.add("transparent");
-      // e.style.backgroundColor = bodyClr;
-      // e.style.borderColor = bodyClr;
+    };
+
+    const unhide = elem => {
+      const e = elem;
+      e.classList.remove("transparent");
+    };
+
+    const styleBgrAndBorder = (color, elem) => {
+      const e = elem;
+      e.style.backgroundColor = color;
+      e.style.borderColor = borderClr;
+    };
+
+    const styleSquaresWithWinningClr = () => {
+      for (let i = 0; i < noOfColorSquares; i++) {
+        if (i < noOfVisibleSquares) {
+          const sqr = squares[i];
+          styleBgrAndBorder(winningColor, sqr);
+          unhide(sqr);
+        }
+      }
     };
 
     const isFinalRound = () => {
@@ -93,26 +92,28 @@ document.addEventListener("DOMContentLoaded", () => {
         currentGameStatus = GAME_STATUS.over;
         currentRound = 1;
         currentScore = totalScore;
-        resetElem.textContent = "new game";
       } else {
         currentRound++;
       }
+    };
+
+    const processRoundEnd = () => {
+      currentRoundStatus = ROUND_STATUS.over;
+      const gameOver = isFinalRound();
+      if (gameOver) {
+        scoreInfoElem.classList.toggle("highlight");
+      }
+      resetElem.textContent = gameOver ? "new game" : "next round";
+      resetElem.classList.add("highlight");
+      styleSquaresWithWinningClr();
+      styleBgrAndBorder(winningColor, jumbotron);
     };
 
     const processClickedSquare = sqr => {
       if (currentRoundStatus === ROUND_STATUS.over) return;
 
       if (isWinner(Number(sqr.dataset.id))) {
-        setSameColorOnSquares();
-        setBgrColor(winningColor, jumbotron);
-        currentRoundStatus = ROUND_STATUS.over;
-        //--------------
-        const gameOver = isFinalRound();
-        resetElem.textContent = gameOver ? "new game" : "next round";
-        resetElem.classList.add("highlight");
-        if (gameOver) {
-          scoreInfoElem.classList.toggle("highlight");
-        }
+        processRoundEnd();
       } else {
         hide(sqr);
         currentScore -= 1;
@@ -121,25 +122,28 @@ document.addEventListener("DOMContentLoaded", () => {
       roundInfoElem.textContent = currentRound;
     };
 
-    const setData = (elem, property, val) => {
+    const setId = (elem, property, val) => {
       const element = elem;
       element.dataset[property] = val;
     };
 
-    const setBgrColorsAndDataOnSquares = () => {
+    const setBgrColorAndIdOnSquares = () => {
       for (let i = 0; i < noOfColorSquares; i++) {
         if (i < noOfVisibleSquares) {
-          setBgrColor(getRandomRgbColor(), squares[i]);
-          setData(squares[i], "id", i);
+          styleBgrAndBorder(getRandomRgbColor(), squares[i]);
+          setId(squares[i], "id", i);
         } else {
           hide(squares[i]);
         }
       }
     };
 
-    const setWinningColorAndWinningId = () => {
-      winningColor = getRandomRgbColor();
+    const calculateWinningId = () => {
       winningId = getRandomInt(0, noOfVisibleSquares);
+    };
+
+    const calculateWinningColor = () => {
+      winningColor = getRandomRgbColor();
     };
 
     const addListenersToSquares = () => {
@@ -150,31 +154,32 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     };
 
-    const reset = () => {
-      updateRoundsCount();
-      roundInfoElem.textContent = currentRound; // display
-      scoreInfoElem.textContent = `${currentScore} / ${totalScore}`;
-      currentGameStatus = GAME_STATUS.on;
-      currentRoundStatus = ROUND_STATUS.on;
-      noOfVisibleSquares = currentLevel;
+    const updateDisplay = () => {
       jumbotron.style.backgroundColor = "";
       resetElem.textContent = isFinalRound() ? "new game" : "new colors";
+      resetElem.classList.remove("highlight");
+      scoreInfoElem.textContent = `${currentScore} / ${totalScore}`;
+      scoreInfoElem.classList.remove("highlight");
+      roundInfoElem.textContent = currentRound;
 
-      if (resetElem.classList.contains("highlight")) {
-        resetElem.classList.remove("highlight");
-        scoreInfoElem.classList.remove("highlight");
-      }
+      setBgrColorAndIdOnSquares();
+      styleBgrAndBorder(winningColor, squares[winningId]);
+      displayElem.textContent = winningColor;
+      // console.log(`${winningColor}, winning id: ${winningId}}`);
+    };
 
-      setBgrColorsAndDataOnSquares();
-      setWinningColorAndWinningId();
-      setBgrColor(winningColor, squares[winningId]);
-      showOnPage(winningColor, displayElem);
-      console.log(`${winningColor}, winning id: ${winningId}}`);
+    const reset = () => {
+      updateRoundsCount();
+      currentRoundStatus = ROUND_STATUS.on;
+      currentGameStatus = GAME_STATUS.on;
+      noOfVisibleSquares = currentLevel;
+      calculateWinningId();
+      calculateWinningColor();
+
+      updateDisplay();
     };
 
     const toggleLevel = () => {
-      /*  noOfVisibleSquares =
-        noOfVisibleSquares === LEVEL.hard ? LEVEL.easy : LEVEL.hard; */
       return currentLevel === LEVEL.hard ? LEVEL.easy : LEVEL.hard;
     };
 
