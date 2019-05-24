@@ -22,6 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const helpBtn = document.querySelector(".btn-help");
     const rgbimgElem = document.querySelector(".rgbimg-wrapper");
     const borderClr = "#f8f9fa";
+    const dark = "#15151b";
     let winningColor = "";
     const ROUNDS_LIMIT = 5;
     let currentRound = 0;
@@ -52,12 +53,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const hide = elem => {
       const e = elem;
-      e.classList.add("transparent");
+      e.style.backgroundColor = dark;
+      e.style.borderColor = dark;
     };
 
     const unhide = elem => {
       const e = elem;
-      e.classList.remove("transparent");
+      e.style.borderColor = "";
     };
 
     const styleBgrAndBorder = (color, elem) => {

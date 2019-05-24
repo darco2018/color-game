@@ -101,11 +101,8 @@ textarea {
    Author's custom styles
    ========================================================================== */
 
-:root {
-  /* --primary: steelblue;
-    --light: #f8f9fa;
-    --bodyClr: #15151b;
-    --bodyClr: teal; */
+.unused {
+  color: red;
 }
 
 @function color($color-name) {
@@ -113,18 +110,45 @@ textarea {
 }
 
 $colors: (
-  primary: steelblue,
-  accent: #f8f9fa,
-  dark: #15151b
+  "primary": steelblue,
+  "accent": #f8f9fa,
+  "dark": #15151b
 );
+
+$breakpoints: (
+  "small": 570px
+);
+@function size($breakpoint) {
+  @return map-get($breakpoints, $breakpoint);
+}
+
+@mixin uppercase() {
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+//$mq-size: 570px;
+@mixin respon-to($size) {
+  @media only screen and (min-width: #{$size}) {
+    @content;
+  }
+}
 
 $middleWrapperMaxWidth: 600px;
 $jumboHeight: 130px;
+@include respon-to(size(small)) {
+  $jumboHeight: 120px;
+}
 
 body {
   background-color: lighten(map-get($colors, dark), 1%);
   color: map-get($colors, accent);
   font-family: "Montserrat", "Avenir", sans-serif;
+
+  @include respon-to(size(small)) {
+    font-size: 1.3rem;
+    padding-top: 0;
+  }
 
   .clip {
     position: absolute;
@@ -145,11 +169,23 @@ body {
   padding: 0.1rem 0;
   margin-bottom: 0;
 
-  h1 {
+  &__heading {
     font-size: 1.4rem;
+    @include uppercase;
 
+    @include respon-to(size(small)) {
+      font-size: 1.9rem;
+      line-height: 1.95rem;
+      letter-spacing: 0.4rem;
+      margin-top: 1rem;
+    }
     .rgb-values {
       color: map-get($colors, dark);
+      @include respon-to(size(small)) {
+        display: inline-block;
+        padding-top: 0.5rem;
+        padding-bottom: 0.5rem;
+      }
     }
   }
 }
@@ -159,7 +195,7 @@ body {
   padding-left: 0.4rem;
   padding-right: 0.4rem;
 
-  .controls-wrapper {
+  &__wrapper {
     max-width: $middleWrapperMaxWidth - 50px;
     margin: 0 auto;
 
@@ -168,24 +204,28 @@ body {
     }
     .controls--right {
       float: right;
-    }
 
-    .controls-bar__button {
-      text-transform: lowercase;
-      background-color: map-get($colors, primary);
-      color: map-get($colors, accent);
-      border: none;
-      outline: none;
-      transition-duration: 0.4s;
-      cursor: pointer;
-      font-weight: 800;
-      text-align: center;
-      padding: 0.5rem 0.2rem;
+      .selected {
+        background-color: map-get($colors, accent);
+        color: map-get($colors, primary);
+      }
     }
+  }
+  &__button {
+    text-transform: lowercase;
+    background-color: map-get($colors, primary);
+    color: map-get($colors, accent);
+    border: none;
+    outline: none;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    font-weight: 800;
+    text-align: center;
+    padding: 0.5rem 0.2rem;
+  }
 
-    .controls-bar__button::first-letter {
-      text-transform: capitalize;
-    }
+  &__button::first-letter {
+    text-transform: capitalize;
   }
 }
 
@@ -195,13 +235,14 @@ body {
 }
 
 .squares-wrapper {
+  background-color: dark;
   max-width: $middleWrapperMaxWidth;
   margin: 0 auto;
   padding: 0;
   padding-left: 0.3rem;
-
+  box-shadow: 31px 29px 35px 49px rgba(0, 0, 0, 0.76);
+  z-index: 1;
   .square {
-    background-color: teal;
     border: 2px solid map-get($colors, accent);
     width: 29%;
     padding-bottom: 30%;
@@ -214,21 +255,24 @@ body {
   margin: 0 auto;
   width: 29%;
 
+  @include respon-to(size(small)) {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
   img {
     width: 100%;
 
-    object-fit: cover;
-    overflow: hidden;
+    @include respon-to(size(small)) {
+      height: $jumboHeight + 3px;
+      width: $jumboHeight + 3px;
+    }
   }
 }
 
 .transparent {
   opacity: 0;
-}
-
-.selected {
-  background-color: map-get($colors, accent);
-  color: map-get($colors, primary);
 }
 
 .highlight {
@@ -320,33 +364,9 @@ body {
    These examples override the primary ('mobile first') styles.
    Modify as content requires.
    ========================================================================== */
-// mmm
+/* 
 @media only screen and (min-width: 570px) {
-  body {
-    font-size: 1.3rem;
-    padding-top: 0;
-  }
-
-  h1 {
-    font-size: 1.4rem;
-    line-height: 1.95rem;
-    letter-spacing: 0.4rem;
-    margin-top: 0.5rem;
-  }
-
-  $jumboHeight: 120px;
-
-  .rgbimg-wrapper {
-    position: absolute;
-    top: 0;
-    left: 0;
-
-    img {
-      height: $jumboHeight;
-      width: $jumboHeight;
-    }
-  }
-}
+} */
 
 @media print,
   (-webkit-min-device-pixel-ratio: 1.25),
