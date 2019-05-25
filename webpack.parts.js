@@ -28,14 +28,14 @@ exports.keepVendorHashConsistent = () => ({
 //------------------------------------------------
 
 const StyleLintPlugin = require("stylelint-webpack-plugin");
-
+// ?! @imports in files are not followed, meaning only the main file for each require/entry is linted.
 exports.stylelint = () => ({
   plugins: [
     new StyleLintPlugin({
-      files: "src/**/*.css",
-      failOnError: false,
+      files: ["src/**/*.css", "src/**/*.scss"],
+      failOnError: false, // true = stylelint error will break webpack build
       emitErrors: false, // reports errors as warnings
-      quiet: false,
+      quiet: false, // true = avoid error output to the console.
     }),
   ],
 });
@@ -133,9 +133,11 @@ exports.extractCSS = ({ include, exclude, use = [] }) => {
         filename: "css/[name].css", // styles/[name].css
         chunkFilename: "[id].css",
       }),
+      // after adding OptimizeCssAssetsPlugin, source maps stopped appearing
       new OptimizeCssAssetsPlugin({
         assetNameRegExp: /\.css$/,
         cssProcessor: CSSNano,
+        cssProcessorOptions: { sourcemap: true },
         cssProcessorPluginOptions: {
           preset: ["default", { discardComments: { removeAll: true } }],
         },
