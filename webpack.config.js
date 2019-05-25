@@ -51,13 +51,6 @@ const productionConfig = merge([
   parts.extractCSS({
     use: ["css-loader", parts.nextGenerationCss(), "sass-loader"], // if it works: pageOne.css should have only one keyframes
   }),
-  // parts.purifyCSS({
-  // must be AFTER extraction. It decreases the .css file with purecss, bootstrap, etc.
-  // Using PurifyCSS loses CSS source maps even if you have enabled them with loader specific configuration due to the way it works underneath.
-  // https://www.codewall.co.uk/how-to-remove-unused-css-from-your-website/
-  //  paths: glob.sync(`${PATHS.app}/**/*.js`, { nodir: true }),
-  // purifyOptions: { minify: true, info: true },
-  // }),
   // In case you want to compress your images, use image-webpack-loader, svgo-loader (SVG specific), or imagemin-webpack-plugin. */
   parts.loadImages({
     options: {
