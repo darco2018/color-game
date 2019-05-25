@@ -110,6 +110,8 @@ exports.purifyCSS = ({ paths, purifyOptions }) => ({
 // ------------------------
 
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const OptimizeCssAssetsPlugin = require("optimize-css-assets-webpack-plugin");
+const CSSNano = require("cssnano");
 
 exports.extractCSS = ({ include, exclude, use = [] }) => {
   // Output extracted CSS to a file
@@ -130,6 +132,14 @@ exports.extractCSS = ({ include, exclude, use = [] }) => {
       new MiniCssExtractPlugin({
         filename: "css/[name].css", // styles/[name].css
         chunkFilename: "[id].css",
+      }),
+      new OptimizeCssAssetsPlugin({
+        assetNameRegExp: /\.css$/,
+        cssProcessor: CSSNano,
+        cssProcessorPluginOptions: {
+          preset: ["default", { discardComments: { removeAll: true } }],
+        },
+        canPrint: true,
       }),
     ],
   };
