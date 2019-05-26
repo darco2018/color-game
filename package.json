@@ -18,6 +18,9 @@
     "willbeprefixed": "autoprefixer --info",
     "postcss": "postcss src/**/*.css  --base src   --dir build-css --verbose",
     "browsers": "browserslist",
+    "coverage": "browserslist --coverage=Pl",
+    "doiuse": "npm run sass && doiuse --browsers '> 0.2% in Pl, Chrome >= 70, ios_saf >= 11, Safari >= 12, Edge >= 17, not Samsung < 8.2, not dead, not OperaMini all, not ie > 1, not ie_mob > 1' ./src/css/_custom.css",
+    "sass": "node-sass ./src/css/_custom.scss ./src/css/_custom.css",
     "kill": "netstat -nlp | grep 8080",
     "stats": "webpack --profile --json > stats.json",
     "lint": "eslint --fix src/",
@@ -99,7 +102,16 @@
     ]
   },
   "browserslist": [
-    "ie 11"
+    "> 0.2% in Pl",
+    "Chrome >= 70",
+    "ios_saf >= 11",
+    "Safari >= 12",
+    "Edge >= 17",
+    "not Samsung < 8.2",
+    "not OperaMini all",
+    "not ie > 1",
+    "not ie_mob > 1",
+    "not dead"
   ],
   "h5bp-configs": {
     "directories": {

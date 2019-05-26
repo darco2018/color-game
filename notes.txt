@@ -1,0 +1,13 @@
+Generate clip-path:
+https://bennettfeely.com/clippy/
+
+https://www.npmjs.com/package/clip-path-polyfill
+
+src/css/_custom.css:18:1: CSS Masks not supported by: Edge (17) and only partially supported by: Edge (18), Chrome (70,71,72,73), 
+Safari (12,12.1), Opera (58), iOS Safari (11.0-11.2,11.3-11.4,12.0-12.1,12.2), Android Browser (4.4.3-4.4.4,4.2-4.3), 
+Chrome for Android (73), Samsung Internet (8.2,9.2) (css-masks)
+src/css/_custom.css:18:1: CSS clip-path property (for HTML) not supported by: Edge (17,18), Android Browser (4.2-4.3) 
+and only partially supported by: Chrome (70,71,72,73), Safari (12,12.1), Opera (58), 
+iOS Safari (11.0-11.2,11.3-11.4,12.0-12.1,12.2), Android Browser (4.4.3-4.4.4), Chrome for Android (73), 
+Samsung Internet (8.2,9.2) (css-clip-path)
+---------------------------------------------------------------------------------
