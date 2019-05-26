@@ -11,3 +11,23 @@ and only partially supported by: Chrome (70,71,72,73), Safari (12,12.1), Opera (
 iOS Safari (11.0-11.2,11.3-11.4,12.0-12.1,12.2), Android Browser (4.4.3-4.4.4), Chrome for Android (73), 
 Samsung Internet (8.2,9.2) (css-clip-path)
 ---------------------------------------------------------------------------------
+
+From a page speed standpoint, @import from a CSS file should almost never be used, as it can prevent stylesheets 
+from being downloaded concurrently. 
+If, on the other hand, both stylesheets are referenced in <link> elements in the main HTML page, 
+both can be downloaded at the same time.
+If both stylesheets are always loaded together, it can also be helpful to simply combine them into a single file.
+----------------------------------------------------------------------------------
+<!--[if IE]>
+Conditional comments only work in IE, and are thus excellently suited to give special instructions meant only for IE
+----------------------------------------------------------------------------------
+Tools like webpack-bundle-analyzer are great for analyzing your built JavaScript bundles and 
+import-cost for Visual Code is excellent for visualizing expensive dependencies during your local iteration workflow 
+(e.g. when you `npm install` and import a package).
+Tools like Webpack Bundle Analyzer, Source Map Explorer and Bundle Buddy allow you to audit your bundles 
+for opportunities to trim them down.
+Lighthouse is a tool baked into the Chrome Developer Tools. It’s also available as a Chrome extension. It gives you 
+an in-depth performance analysis that highlights opportunities to improve performance.
+----------------------------------------------------------------------------------
+https://www.webpagetest.org/ << webpage performance test
+Code coverage (wejdz na audits i na dole po lewej jest menu, rozwin i tam jest coverage) is a feature in DevTools that allows you to discover unused JavaScript (and CSS) in your pages.
