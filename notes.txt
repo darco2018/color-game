@@ -31,3 +31,9 @@ an in-depth performance analysis that highlights opportunities to improve perfor
 ----------------------------------------------------------------------------------
 https://www.webpagetest.org/ << webpage performance test
 Code coverage (wejdz na audits i na dole po lewej jest menu, rozwin i tam jest coverage) is a feature in DevTools that allows you to discover unused JavaScript (and CSS) in your pages.
+----------------------------------------------------------------------------------
+https://medium.com/@addyosmani/the-cost-of-javascript-in-2018-7d8950fbb5d4
+----------------------------------------------------------------------------------
+https://frontendchecklist.io/
+----------------------------------------------------------------------------------
+https://levelup.gitconnected.com/top-web-development-articles-of-2018-bd5c3900110b
