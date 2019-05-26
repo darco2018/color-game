@@ -64,6 +64,11 @@ const productionConfig = merge([
     to: PATHS.dist,
     ignore: ["css/*", "js/*", "img/*", "**/*.html", "private/*", "notes.txt"],
   }),
+  /*  parts.copyVendorJs({
+    context: PATHS.app,
+    from: "/home/ustrd/Documents/javascript-projects/modernizr-3.7.1.min.js",
+    to: "js/vendor",
+  }), */
 ]);
 
 /* The loadImages() configuration defaults to url-loader during development and uses both url-loader and file-loader in production 

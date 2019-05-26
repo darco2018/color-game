@@ -17,6 +17,19 @@ exports.copyRootFiles = ({ context, from, to, ignore }) => ({
   ],
 });
 
+exports.copyVendorJs = ({ context, from, to, ignore }) => ({
+  plugins: [
+    new CopyPlugin([
+      {
+        context,
+        from,
+        to,
+        ignore,
+      },
+    ]),
+  ],
+});
+
 //------------------------------------------------
 const webpack = require("webpack");
 
@@ -213,7 +226,8 @@ exports.babel = include => ({
         // // **Conditions** to match files using RegExp, function.
         test: /\.m?js$/,
         include,
-        exclude: /(node_modules|some_other_dir)/,
+        exclude: [/node_modules/, /vendor/],
+        // exclude: /(node_modules|someOtherDir)/,
         // use: "babel-loader?presets[]=env"
         use: [
           {
@@ -257,7 +271,7 @@ exports.loadHtml = ({ include, exclude } = {}) => ({
       template: "./src/index.html",
       filename: `index.html`,
       inject: "body",
-      chunks: ["index"],
+      // chunks: ["modernizr", "index"],
       showErrors: true,
       // will inject  script tag of  in body of index.html :  <script type="text/javascript" src="bundle.js"></script>
     }),
