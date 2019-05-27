@@ -226,8 +226,7 @@ exports.babel = include => ({
         // // **Conditions** to match files using RegExp, function.
         test: /\.m?js$/,
         include,
-        exclude: [/node_modules/, /vendor/],
-        // exclude: /(node_modules|someOtherDir)/,
+        exclude: /(node_modules|someOtherDir)/,
         // use: "babel-loader?presets[]=env"
         use: [
           {
