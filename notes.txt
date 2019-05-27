@@ -37,3 +37,23 @@ https://medium.com/@addyosmani/the-cost-of-javascript-in-2018-7d8950fbb5d4
 https://frontendchecklist.io/
 ----------------------------------------------------------------------------------
 https://levelup.gitconnected.com/top-web-development-articles-of-2018-bd5c3900110b
+----------------------------------------------------------------------------------
+https://modernizr.github.io/Modernizr/test/index.html
+
+Modernizr.
+1. modernizer is installed globally.
+2. Prepare a modernizr-config.json on their website (Download, choose rules to test, click Build, choose config from the modal
+that will appear).
+3. Run npx modernizr -c modernizr-config.json
+in the folder where the config file is. This will create your custom build modernizr.js(minified), with just the rules you have 
+specified earlier. Move modernizr.js to js/vendor.
+4. When you run npx run build, all files from the folder will be copied to dist/js/vendor 
+
+NOTE: Adding "classPrefix": "mod_", to config will will prevent it from changing no-js to js. Bug?
+NOTE: When running page from file system rather than on server, modernizr works but doesnt change no-js to js. Probably it
+should be like this...
+PROBLEM: Webpack doesnt create link to modernizr in the body of index.html. So I have to add link explicitely in index.html.
+I tried to add entry for modernizr in webpack.config.json, and then add chunk for it in HtmlWebpackPlugin config in
+webpack.parts.js but webpack hangs. I guess the file goes through Babel. i couldnt exclude the vendor folder in babel options.
+PROBLEM: When I try to import modernizr in to main.js, webpack hangs.<s
+
