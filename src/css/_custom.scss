@@ -1,7 +1,3 @@
-.unused {
-  color: red;
-}
-
 @function color($color-name) {
   @return map-get($colors, $color-name);
 }
@@ -133,7 +129,7 @@ body {
 }
 
 .squares-wrapper {
-  background-color: dark;
+  background-color: color(dark);
   max-width: $middleWrapperMaxWidth;
   margin: 0 auto;
   padding: 0;

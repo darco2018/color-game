@@ -55,14 +55,6 @@ exports.stylelint = () => ({
 
 //------------------------------------------------
 
-const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
-
-exports.uglifyJS = () => ({
-  plugins: [new UglifyJsPlugin()],
-});
-
-//------------------------------------------------
-
 const CleanWebpackPlugin = require("clean-webpack-plugin");
 
 exports.clean = dir => ({

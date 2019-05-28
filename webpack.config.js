@@ -97,8 +97,3 @@ module.exports = mode => {
 
   return merge(commonConfig, developmentConfig, { mode });
 };
-
-// plugins: [new webpack.HotModuleReplacementPlugin()], haven't done it yet
-// Production mode enables all sorts of optimizations out of the box.
-// Including minification, scope hoisting, tree-shaking and more.
-// parts.uglifyJS() not necessary
