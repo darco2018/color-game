@@ -29,6 +29,13 @@ exports.copyVendorJs = ({ context, from, to, ignore }) => ({
     ]),
   ],
 });
+//------------------------------------------------
+
+const DashboardPlugin = require("webpack-dashboard/plugin");
+
+exports.webpackDashboard = () => ({
+  plugins: [new DashboardPlugin()],
+});
 
 //------------------------------------------------
 const webpack = require("webpack");
@@ -46,7 +53,7 @@ exports.stylelint = () => ({
   plugins: [
     new StyleLintPlugin({
       files: ["src/**/*.css", "src/**/*.scss"],
-      failOnError: false, // true = stylelint error will break webpack build
+      failOnError: true, // true = stylelint error will break webpack build
       emitErrors: false, // reports errors as warnings
       quiet: false, // true = avoid error output to the console.
     }),

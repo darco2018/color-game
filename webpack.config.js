@@ -62,7 +62,15 @@ const productionConfig = merge([
     context: PATHS.app,
     from: "**/*",
     to: PATHS.dist,
-    ignore: ["css/*", "js/*", "img/*", "**/*.html", "private/*", "notes.txt"],
+    ignore: [
+      "css/*",
+      "js/*",
+      "img/*",
+      "**/*index.html",
+      "private/*",
+      "scripts/*",
+      "notes.txt",
+    ],
   }),
   /*  parts.copyVendorJs({
     context: PATHS.app,
