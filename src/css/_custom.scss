@@ -52,6 +52,13 @@ body {
     background-color: color(dark);
     /* map-get($colors, dark); */
   }
+
+  .bottom-wrapper {
+    text-align: center;
+    font-weight: normal;
+    font-size: 50%;
+    margin-top: 3rem;
+  }
 }
 
 .jumbotron {
