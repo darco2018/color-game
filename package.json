@@ -1,7 +1,7 @@
 {
   "name": "dummypackagename",
   "version": "1.0.0",
-  "description": "dummy description",
+  "description": "App for testing your knowledge of rgb",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/darco2018/dummyrepo.git"
@@ -13,6 +13,11 @@
   },
   "homepage": "http://www.javacoder.cloud",
   "main": "webpack.config.js",
+  "keywords": [
+    "rgb",
+    "color",
+    "game"
+  ],
   "scripts": {
     "stylelint": "stylelint src/**/*.css --fix",
     "willbeprefixed": "autoprefixer --info",
@@ -26,6 +31,8 @@
     "lint": "eslint --fix src/",
     "preious-build": "webpack --mode=production --display-error-details",
     "watch": "webpack -d --watch  --display-error-details",
+    "fixCss": "node scripts/fixPathInCssBackground.js",
+    "dev": "webpack-dashboard -- node index.js",
     "start": "webpack-dev-server --env development",
     "build": "webpack --env production"
   },
@@ -88,6 +95,7 @@
     "url-loader": "^1.1.2",
     "webpack": "4.19.1",
     "webpack-cli": "^3.3.2",
+    "webpack-dashboard": "^3.0.7",
     "webpack-dev-server": "^3.3.1",
     "webpack-merge": "^4.2.1"
   },
