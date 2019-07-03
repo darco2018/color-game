@@ -28,17 +28,17 @@ document.addEventListener("DOMContentLoaded", () => {
     let currentRound = 0;
     const GAME_STATUS = {
       over: 0,
-      on: 1,
+      on: 1
     };
     let currentGameStatus = GAME_STATUS.on;
     const ROUND_STATUS = {
       over: 0,
-      on: 1,
+      on: 1
     };
     let currentRoundStatus = ROUND_STATUS.on;
     const LEVEL = {
       easy: 3,
-      hard: 6,
+      hard: 6
     };
     let currentLevel = LEVEL.hard;
     const noOfColorSquares = 6;
